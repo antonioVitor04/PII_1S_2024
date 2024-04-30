@@ -1,3 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package br.PII_1_2024.jogo;
+
+/**
+ *
+ * @author anton
+ */
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +20,7 @@ public class Carta extends JButton {
     public Carta(int numero, ImageIcon imagemVirada) {
         this.numero = numero;
         this.imagemVirada = imagemVirada;
-        this.imagemPadrao = new ImageIcon("TelaJogo.jpg"); // Caminho da imagem de carta virada para baixo
+        this.imagemPadrao = new ImageIcon("src/main/resources/images/ImagemDeFases.jpg"); // Caminho da imagem de carta virada para baixo
         this.virada = false;
 
         // Definir a imagem padrão (carta virada para baixo)
