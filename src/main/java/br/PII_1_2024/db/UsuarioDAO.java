@@ -50,8 +50,8 @@ public class UsuarioDAO {
         rs.beforeFirst();
         int contador = 0;
         while (rs.next()){
-            int codigo = rs.getInt("codigo");
-            String descricao = rs.getString("descrição");
+            int codigo = rs.getInt("idturma");
+            String descricao = rs.getString("turma");
             turmas[contador++] = new Turma (codigo, descricao);
         }
         return turmas;

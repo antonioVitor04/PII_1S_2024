@@ -19,6 +19,7 @@ public class GerenciarTurma extends javax.swing.JFrame {
      */
     public GerenciarTurma() {
         initComponents();
+        buscarCursos();
     }
     
     private void buscarCursos (){
