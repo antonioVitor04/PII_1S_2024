@@ -96,7 +96,7 @@ public class HUBJogador extends javax.swing.JFrame {
 
     private void jogarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jogarButtonActionPerformed
         dispose();
-        new TelaJogo().setVisible(true);
+        new TelaMapa().setVisible(true);
     }//GEN-LAST:event_jogarButtonActionPerformed
 
     private void voltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarButtonActionPerformed

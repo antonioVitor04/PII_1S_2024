@@ -2,19 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.PII_1_2024.jogo;
-
-import br.PII_1_2024.modelo.Turma;
+package br.PII_1_2024.modelo;
 
 /**
  *
  * @author anton
  */
-public class Jogador{
+public class Turma{
 
+    public Turma(int codigo, String descricao) {
+        this.codigo = codigo;
+        this.descricao = descricao;
+    }
     int codigo;
-    String nome;
-    Turma turma;
+    String descricao;
 
     public int getCodigo() {
         return codigo;
@@ -24,19 +25,11 @@ public class Jogador{
         this.codigo = codigo;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

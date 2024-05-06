@@ -4,6 +4,7 @@
  */
 package br.PII_1_2024.db;
 
+import br.PII_1_2024.modelo.Turma;
 import br.PII_1_2024.modelo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,4 +36,29 @@ public class UsuarioDAO {
         //8. responder se existe ou não
         return achou;
     }
+    public Turma [] obterTurma () throws Exception{
+        String sql = "SELECT * FROM tb_turma";
+        try (Connection conexao = new ConnectionFactory().obterConexao();
+            PreparedStatement ps =
+                conexao.prepareStatement(sql,
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = ps.executeQuery()){
+
+        int totalDeTurmas = rs.last () ? rs.getRow() : 0;
+        Turma [] turmas = new Turma[totalDeTurmas];
+        rs.beforeFirst();
+        int contador = 0;
+        while (rs.next()){
+            int codigo = rs.getInt("codigo");
+            String descricao = rs.getString("descrição");
+            turmas[contador++] = new Turma (codigo, descricao);
+        }
+        return turmas;
+    }
+ }
+
 }
+
+
+

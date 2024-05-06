@@ -11,6 +11,7 @@ package br.PII_1_2024.jogo;
 import br.PII_1_2024.db.UsuarioDAO;
 import br.PII_1_2024.modelo.Usuario;
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 public class LoginTela extends javax.swing.JFrame {
 
     /**
@@ -115,16 +116,19 @@ public class LoginTela extends javax.swing.JFrame {
             usuario.setLogin(login);
             usuario.setSenha(senha);
             var dao = new UsuarioDAO();
-            if(dao.existe(usuario)){
-
+            if (dao.existe(usuario)){
+                JOptionPane.showMessageDialog (null, "Bem vindo, " +
+                usuario.getLogin() + "!");
             }
             else{
-
+                JOptionPane.showMessageDialog(null, "Usuário inválido");
             }
         }
-        catch(Exception e){
-            
-        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog (null, "Problemas técnicos. Tente "
+                    + "novamente mais tarde");
+            e.printStackTrace();
+            }
         new HUBJogador().setVisible(true);
     }//GEN-LAST:event_entrarButtonActionPerformed
 
