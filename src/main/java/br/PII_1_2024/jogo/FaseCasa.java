@@ -15,6 +15,7 @@ public class FaseCasa extends javax.swing.JFrame {
      */
     public FaseCasa() {
         initComponents();
+        retornarLogin();
     }
 
     /**

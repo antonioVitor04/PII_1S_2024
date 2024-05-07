@@ -10,12 +10,21 @@ package br.PII_1_2024.modelo;
  */
 public class Turma{
 
-    public Turma(int codigo, String descricao) {
-        this.codigo = codigo;
-        this.descricao = descricao;
-    }
     int codigo;
-    String descricao;
+    String nome;
+
+    public Turma(int codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
+    }
+    public Turma(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 
     public int getCodigo() {
         return codigo;
@@ -25,11 +34,11 @@ public class Turma{
         this.codigo = codigo;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

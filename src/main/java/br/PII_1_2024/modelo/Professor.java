@@ -1,4 +1,4 @@
-package br.PII_1_2024.jogo;
+package br.PII_1_2024.modelo;
 
 public class Professor {
     private int codigo;
@@ -43,4 +43,3 @@ public class Professor {
     
     
 }
-

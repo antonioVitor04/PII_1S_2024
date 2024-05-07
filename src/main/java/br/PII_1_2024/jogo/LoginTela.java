@@ -14,6 +14,7 @@ import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 public class LoginTela extends javax.swing.JFrame {
 
+    private String nomeJogador;
     /**
      * Creates new form LoginTela
      */
@@ -29,6 +30,9 @@ public class LoginTela extends javax.swing.JFrame {
         // Certifique-se de que a janela está corretamente dimensionada
         this.pack();
 
+    }
+    public String retornarLogin(){
+        return nomeJogador;
     }
 
     /**
@@ -113,12 +117,13 @@ public class LoginTela extends javax.swing.JFrame {
             var login = loginTextField.getText();
             var senha = new String(passwordTextField.getPassword());
             var usuario = new Usuario();
+            nomeJogador = usuario.getLogin();
             usuario.setLogin(login);
             usuario.setSenha(senha);
             var dao = new UsuarioDAO();
             if (dao.existe(usuario)){
                 JOptionPane.showMessageDialog (null, "Bem vindo, " +
-                usuario.getLogin() + "!");
+                nomeJogador + "!");
             }
             else{
                 JOptionPane.showMessageDialog(null, "Usuário inválido");
@@ -129,7 +134,7 @@ public class LoginTela extends javax.swing.JFrame {
                     + "novamente mais tarde");
             e.printStackTrace();
             }
-        new HUBJogador().setVisible(true);
+        new GerenciarTurma().setVisible(true);
     }//GEN-LAST:event_entrarButtonActionPerformed
 
     /**

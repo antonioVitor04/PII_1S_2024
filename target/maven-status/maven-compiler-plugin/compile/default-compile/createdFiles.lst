@@ -5,7 +5,10 @@ br\PII_1_2024\jogo\FaseHospital.class
 br\PII_1_2024\jogo\TelaMapa$3.class
 br\PII_1_2024\db\UsuarioDAO.class
 br\PII_1_2024\jogo\FaseCasa.class
+br\PII_1_2024\jogo\GerenciarTurma$2.class
 br\PII_1_2024\jogo\FaseCasa$1.class
+br\PII_1_2024\db\TurmaDAO.class
+br\PII_1_2024\db\ConexaoBD.class
 br\PII_1_2024\modelo\Usuario.class
 br\PII_1_2024\jogo\FaseEscola$1.class
 br\PII_1_2024\jogo\FaseEscola.class
@@ -24,4 +27,5 @@ br\PII_1_2024\jogo\FaseHospital$1.class
 br\PII_1_2024\jogo\TelaMapa.class
 br\PII_1_2024\jogo\HUBProfessor$1.class
 br\PII_1_2024\jogo\FaseCasa$3.class
+br\PII_1_2024\jogo\GerenciarTurma$3.class
 br\PII_1_2024\jogo\HUBJogador$2.class
