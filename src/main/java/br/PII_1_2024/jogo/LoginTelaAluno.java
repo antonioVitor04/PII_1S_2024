@@ -4,21 +4,21 @@
  */
 package br.PII_1_2024.jogo;
 
+import br.PII_1_2024.db.AlunoDAO;
+import br.PII_1_2024.modelo.Aluno;
+import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author anton
  */
-import br.PII_1_2024.db.UsuarioDAO;
-import br.PII_1_2024.modelo.Usuario;
-import java.awt.BorderLayout;
-import javax.swing.JOptionPane;
-public class LoginTela extends javax.swing.JFrame {
-
-    private String nomeJogador;
+public class LoginTelaAluno extends javax.swing.JFrame {
+    private String nomeAluno;
     /**
-     * Creates new form LoginTela
+     * Creates new form LoginTelaAluno
      */
-    public LoginTela() {
+    public LoginTelaAluno() {
         initComponents();
         setLocationRelativeTo(null);       
         TelaFundoJogo login = new
@@ -29,10 +29,9 @@ public class LoginTela extends javax.swing.JFrame {
         login.add(imagemFundoLogin);
         // Certifique-se de que a janela está corretamente dimensionada
         this.pack();
-
     }
     public String retornarLogin(){
-        return nomeJogador;
+        return nomeAluno;
     }
 
     /**
@@ -45,16 +44,10 @@ public class LoginTela extends javax.swing.JFrame {
     private void initComponents() {
 
         imagemFundoLogin = new javax.swing.JPanel();
-        passwordTextField = new javax.swing.JPasswordField();
-        loginTextField = new javax.swing.JTextField();
-        cancelarButton = new javax.swing.JButton();
         entrarButton = new javax.swing.JButton();
+        nomeTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        imagemFundoLogin.setOpaque(false);
-
-        cancelarButton.setText("Cancelar");
 
         entrarButton.setText("Entrar");
         entrarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -70,31 +63,21 @@ public class LoginTela extends javax.swing.JFrame {
             .addGroup(imagemFundoLoginLayout.createSequentialGroup()
                 .addGroup(imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                        .addGap(287, 287, 287)
-                        .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(392, 392, 392)
+                        .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                        .addGap(416, 416, 416)
-                        .addGroup(imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 462, Short.MAX_VALUE))
-            .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                .addGap(517, 517, 517)
-                .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(488, 488, 488)
+                        .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(423, Short.MAX_VALUE))
         );
         imagemFundoLoginLayout.setVerticalGroup(
             imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, imagemFundoLoginLayout.createSequentialGroup()
+                .addContainerGap(201, Short.MAX_VALUE)
+                .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134)
+                .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(174, 174, 174))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -112,21 +95,26 @@ public class LoginTela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarButtonActionPerformed
-        dispose();
+        int alunoAtual;
         try{
-            var login = loginTextField.getText();
-            var senha = new String(passwordTextField.getPassword());
-            var usuario = new Usuario();
-            nomeJogador = usuario.getLogin();
-            usuario.setLogin(login);
-            usuario.setSenha(senha);
-            var dao = new UsuarioDAO();
-            if (dao.existe(usuario)){
+            
+            var login = nomeTextField.getText();
+            var aluno = new Aluno(login);
+            nomeAluno = aluno.getNome();
+            aluno.setNome(login);
+            var dao = new AlunoDAO();
+            if (dao.existe(aluno)){
                 JOptionPane.showMessageDialog (null, "Bem vindo, " +
-                nomeJogador + "!");
+                nomeAluno + "!");
+                alunoAtual = dao.obterCodigo(aluno);
+                //Utils.alunoAtual = aluno;
+                // Utils.codigoAlunoAtual = resultSet.getInt("codigo");
+                new HUBJogador().setVisible(true);
+                this.dispose();
             }
             else{
                 JOptionPane.showMessageDialog(null, "Usuário inválido");
+                nomeTextField.setText("");
             }
         }
         catch (Exception e){
@@ -134,9 +122,8 @@ public class LoginTela extends javax.swing.JFrame {
                     + "novamente mais tarde");
             e.printStackTrace();
             }
-        new GerenciarTurma().setVisible(true);
     }//GEN-LAST:event_entrarButtonActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -154,29 +141,27 @@ public class LoginTela extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginTelaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginTelaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginTelaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginTelaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginTela().setVisible(true);
+                new LoginTelaAluno().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelarButton;
     private javax.swing.JButton entrarButton;
     private javax.swing.JPanel imagemFundoLogin;
-    private javax.swing.JTextField loginTextField;
-    private javax.swing.JPasswordField passwordTextField;
+    private javax.swing.JTextField nomeTextField;
     // End of variables declaration//GEN-END:variables
 }

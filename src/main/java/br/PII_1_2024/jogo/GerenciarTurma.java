@@ -29,7 +29,7 @@ public class GerenciarTurma extends javax.swing.JFrame {
         turmasComboBox.setModel(new DefaultComboBoxModel<>(turmas));
     }
     catch (Exception e){
-        JOptionPane.showMessageDialog(null, "Cursos indisponíveis, tente"
+        JOptionPane.showMessageDialog(null, "turmas indisponíveis, tente"
                 + "novamente mais tarde.");
         e.printStackTrace();
     }
@@ -52,7 +52,8 @@ public class GerenciarTurma extends javax.swing.JFrame {
         cancelarTurmaButton = new javax.swing.JButton();
         turmasComboBox = new javax.swing.JComboBox<>();
         atualizarTurmaButton = new javax.swing.JButton();
-        codigoTextField = new javax.swing.JTextField();
+        codigoTurmaTextField = new javax.swing.JTextField();
+        limparTextoTextField = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,8 +65,18 @@ public class GerenciarTurma extends javax.swing.JFrame {
         });
 
         removerTurmaButton.setText("Remover");
+        removerTurmaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removerTurmaButtonActionPerformed(evt);
+            }
+        });
 
         cancelarTurmaButton.setText("Cancelar");
+        cancelarTurmaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarTurmaButtonActionPerformed(evt);
+            }
+        });
 
         turmasComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,45 +91,57 @@ public class GerenciarTurma extends javax.swing.JFrame {
             }
         });
 
+        codigoTurmaTextField.setEditable(false);
+
+        limparTextoTextField.setText("Limpar");
+        limparTextoTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limparTextoTextFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(turmasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(nomeTurmaTextField, javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(582, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(limparTextoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cancelarTurmaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(novaTurmaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cancelarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(novaTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(removerTurmaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                .addComponent(atualizarTurmaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(codigoTextField, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addGap(0, 76, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(atualizarTurmaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                                .addComponent(removerTurmaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(turmasComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nomeTurmaTextField)
+                        .addComponent(codigoTurmaTextField)))
+                .addGap(387, 387, 387))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(turmasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(140, 140, 140)
+                .addComponent(turmasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(codigoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(codigoTurmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(nomeTurmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(novaTurmaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                    .addComponent(atualizarTurmaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(removerTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(novaTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(atualizarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removerTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(limparTextoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,16 +149,13 @@ public class GerenciarTurma extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(469, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(425, 425, 425))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -144,19 +164,20 @@ public class GerenciarTurma extends javax.swing.JFrame {
     private void novaTurmaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novaTurmaButtonActionPerformed
         String nomeTurma = nomeTurmaTextField.getText();
         if (nomeTurma == null || nomeTurma.length() == 0 ){
-            JOptionPane.showMessageDialog (null, "Preencha curso e tipo");
+            JOptionPane.showMessageDialog (null, "Preencha o nome da turma");
         }
         else{
             try{
                 int escolha = JOptionPane.showConfirmDialog(null, "Confirmar cadastro "
-                        + "de novo curso?");
+                        + "de nova turma?");
                 if (escolha == JOptionPane.YES_OPTION){
                     Turma turma = new Turma (nomeTurma);
                     TurmaDAO dao = new TurmaDAO();
                     dao.inserirTurma(turma);
-                    JOptionPane.showMessageDialog(null, "Curso cadastrado com "
+                    JOptionPane.showMessageDialog(null, "Turma cadastrada com "
                             + "sucesso");
                     nomeTurmaTextField.setText("");
+                    codigoTurmaTextField.setText("");
                     buscarTurmas();
                 }
             }
@@ -164,31 +185,31 @@ public class GerenciarTurma extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Falha técnica, tente mais tarde");
                 e.printStackTrace();
             }
-
+        }
     }//GEN-LAST:event_novaTurmaButtonActionPerformed
-}
+
     private void atualizarTurmaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarTurmaButtonActionPerformed
         String nomeTurma = nomeTurmaTextField.getText();
-        String codigoTurma = codigoTextField.getText();
-        if (nomeTurma == null || nomeTurma.length() == 0 
+        String codigoTurma = codigoTurmaTextField.getText();
+        if (nomeTurma == null || nomeTurma.length() == 0
                 && codigoTurma == null || codigoTurma.length() == 0){
             
             JOptionPane.showMessageDialog(null, "ERRO. SELECIONE UMA TURMA");
         }
         else{    
-            int escolha = JOptionPane.showConfirmDialog(null, "Atualizar curso?");
+            int escolha = JOptionPane.showConfirmDialog(null, "Atualizar turma?");
             if (escolha == JOptionPane.YES_OPTION){
                 try{
-                    int id = Integer.parseInt (codigoTextField.getText());
+                    int codigo = Integer.parseInt(codigoTurmaTextField.getText());
                     String nome = nomeTurmaTextField.getText();
-                    Turma turma = new Turma (id, nome);
+                    Turma turma = new Turma (codigo, nome);
                     TurmaDAO dao = new TurmaDAO();
                     dao.atualizarTurma(turma);
-                    JOptionPane.showMessageDialog(null, "Curso atualizado"
+                    JOptionPane.showMessageDialog(null, "turma atualizada"
                             + " com sucesso");
                     buscarTurmas();
-                    codigoTextField.setText("");
                     nomeTurmaTextField.setText("");
+                    codigoTurmaTextField.setText("");
                 }
                 catch (Exception e){
                     JOptionPane.showMessageDialog(null, "Falha técnica. Tente novamente "
@@ -201,9 +222,50 @@ public class GerenciarTurma extends javax.swing.JFrame {
 
     private void turmasComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turmasComboBoxActionPerformed
         Turma turma = (Turma) turmasComboBox.getSelectedItem();
-        codigoTextField.setText(Integer.toString(turma.getCodigo()));
         nomeTurmaTextField.setText(turma.getNome());
+        codigoTurmaTextField.setText(Integer.toString(turma.getCodigoTurma()));
     }//GEN-LAST:event_turmasComboBoxActionPerformed
+
+    private void removerTurmaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerTurmaButtonActionPerformed
+        String nomeTurma = nomeTurmaTextField.getText();
+        String codigoTurma = codigoTurmaTextField.getText();
+        if (nomeTurma == null || nomeTurma.length() == 0 
+                && codigoTurma == null || codigoTurma.length() == 0 ){
+            
+            JOptionPane.showMessageDialog(null, "ERRO. SELECIONE UMA TURMA");
+        }
+        else{
+            int escolha = JOptionPane.showConfirmDialog(null, "Remover turma?");
+            if (escolha == JOptionPane.YES_OPTION){
+                try{
+                    int codigo = Integer.parseInt(codigoTurmaTextField.getText());
+                    Turma turma = new Turma (codigo);
+                    TurmaDAO dao = new TurmaDAO();
+                    dao.removerTurma(turma);
+                    JOptionPane.showMessageDialog(null, "turma removida "
+                            + "com sucesso!");
+                    buscarTurmas();
+                    nomeTurmaTextField.setText("");
+                    codigoTurmaTextField.setText("");
+                }
+                catch (Exception e){
+                    JOptionPane.showMessageDialog(null, "Falha técnica."
+                            + " Tente novamente mais tarde.");
+                e.printStackTrace();
+                }
+        }
+        }
+    }//GEN-LAST:event_removerTurmaButtonActionPerformed
+
+    private void cancelarTurmaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarTurmaButtonActionPerformed
+        new HUBProfessor().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cancelarTurmaButtonActionPerformed
+
+    private void limparTextoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparTextoTextFieldActionPerformed
+        nomeTurmaTextField.setText("");
+        codigoTurmaTextField.setText("");
+    }//GEN-LAST:event_limparTextoTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,8 +276,9 @@ public class GerenciarTurma extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atualizarTurmaButton;
     private javax.swing.JButton cancelarTurmaButton;
-    private javax.swing.JTextField codigoTextField;
+    private javax.swing.JTextField codigoTurmaTextField;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton limparTextoTextField;
     private javax.swing.JTextField nomeTurmaTextField;
     private javax.swing.JButton novaTurmaButton;
     private javax.swing.JButton removerTurmaButton;

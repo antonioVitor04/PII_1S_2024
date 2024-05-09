@@ -4,19 +4,28 @@
  */
 package br.PII_1_2024.jogo;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+
 /**
  *
  * @author anton
  */
 public class FaseCasa extends javax.swing.JFrame {
-
+    
+    
+           
     /**
      * Creates new form FaseCasa
      */
     public FaseCasa() {
         initComponents();
-        retornarLogin();
+  
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,7 +73,7 @@ public class FaseCasa extends javax.swing.JFrame {
         telaFundoCasaLayout.setHorizontalGroup(
             telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telaFundoCasaLayout.createSequentialGroup()
-                .addContainerGap(245, Short.MAX_VALUE)
+                .addContainerGap(243, Short.MAX_VALUE)
                 .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(iniciarBanheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                     .addComponent(iniciarQuarto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -72,7 +81,7 @@ public class FaseCasa extends javax.swing.JFrame {
                 .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(iniciarSala, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                     .addComponent(iniciarCozinha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         telaFundoCasaLayout.setVerticalGroup(
             telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,10 +103,7 @@ public class FaseCasa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(telaFundoCasa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(telaFundoCasa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,6 +118,13 @@ public class FaseCasa extends javax.swing.JFrame {
         var jogoBanheiro = new JogoDaMemoria("banheiro");
         jogoBanheiro.inicializarJogoMemoria(8, "banheiro");
         jogoBanheiro.setVisible(true);
+        jogoBanheiro.setJogoTerminadoListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long tempoTotal = jogoBanheiro.getTempoTotal();
+                Utils.tempoFaseBanheiro = tempoTotal;               
+            }
+        });
     }//GEN-LAST:event_iniciarBanheiroMouseClicked
 
     private void iniciarCozinhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarCozinhaMouseClicked
@@ -119,6 +132,7 @@ public class FaseCasa extends javax.swing.JFrame {
         var jogoCozinha = new JogoDaMemoria("cozinha");
         jogoCozinha.inicializarJogoMemoria(8, "cozinha");
         jogoCozinha.setVisible(true);
+        
     }//GEN-LAST:event_iniciarCozinhaMouseClicked
 
     private void iniciarQuartoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarQuartoMouseClicked
@@ -126,6 +140,7 @@ public class FaseCasa extends javax.swing.JFrame {
         var jogoQuarto = new JogoDaMemoria("quarto");
         jogoQuarto.inicializarJogoMemoria(8, "quarto");
         jogoQuarto.setVisible(true);
+        
     }//GEN-LAST:event_iniciarQuartoMouseClicked
 
     private void iniciarSalaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarSalaMouseClicked
@@ -133,6 +148,7 @@ public class FaseCasa extends javax.swing.JFrame {
         var jogoSala = new JogoDaMemoria("sala");
         jogoSala.inicializarJogoMemoria(8, "sala");
         jogoSala.setVisible(true);
+        
     }//GEN-LAST:event_iniciarSalaMouseClicked
 
     /**

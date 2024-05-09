@@ -25,8 +25,8 @@ public class TurmaDAO {
         rs.beforeFirst();
         int contador = 0;
         while (rs.next()){
-            int codigo = rs.getInt("idturma");
             String nome = rs.getString("turma");
+            int codigo = rs.getInt("id_turma");
             turmas[contador++] = new Turma (codigo, nome);
         }
         return turmas;
@@ -41,13 +41,21 @@ public class TurmaDAO {
         }
     }
     public void atualizarTurma (Turma turma) throws Exception{
-        String sql = "UPDATE tb_turma SET turma = ? WHERE idturma = ?";
+        String sql = "UPDATE tb_turma SET turma = ? WHERE id_turma = ?";
         try (Connection con = ConexaoBD.obterConexao();
                 PreparedStatement ps = con.prepareStatement(sql)){
-            ps.setString (1, turma.getNome());
-            ps.setInt (2, turma.getCodigo());
+            ps.setString(1, turma.getNome());
+            ps.setInt (2, turma.getCodigoTurma());
             ps.execute();
+        }
     }
- }
+    public void removerTurma (Turma turma) throws Exception{
+        String sql = "DELETE FROM tb_turma WHERE id_turma = ?";
+        try (Connection conexao = ConexaoBD.obterConexao();
+                PreparedStatement ps = conexao.prepareStatement(sql);){
+            ps.setInt (1, turma.getCodigoTurma());
+            ps.execute();
+        }
+    }
 
 }

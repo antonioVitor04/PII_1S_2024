@@ -8,29 +8,36 @@ package br.PII_1_2024.modelo;
  *
  * @author anton
  */
-public class Turma{
+public class Aluno{
 
-    int codigoTurma;
+    int codigo;
     String nome;
-
-    public Turma(int codigoTurma, String nome) {
-        this.codigoTurma = codigoTurma;
+    int codigoTurma;
+    String turma;
+    
+    public Aluno(int codigo, String nome, int codigoTurma) {
+        this.codigo = codigo;
         this.nome = nome;
+        this.codigoTurma = codigoTurma;
     }
-    public Turma(String nome) {
+    
+    public Aluno(String nome, int codigoTurma) {
+        this.nome = nome;
+        this.codigoTurma = codigoTurma;
+    }
+
+    public Aluno(int codigo) {
+        this.codigo = codigo;
+    }
+    public Aluno(String nome) {
         this.nome = nome;
     }
     
-    public Turma (int codigoTurma){
-        this.codigoTurma = codigoTurma;
-    }
-
-
     @Override
     public String toString() {
         return this.nome;
     }
-
+    
     public int getCodigoTurma() {
         return codigoTurma;
     }
@@ -39,11 +46,27 @@ public class Turma{
         this.codigoTurma = codigoTurma;
     }
 
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getTurma() {
+        return turma;
+    }
+
+    public void setTurma(String turma) {
+        this.turma = turma;
     }
 }

@@ -22,8 +22,9 @@ public class TelaFundoJogo extends JPanel {
     //deve ser utilizado em projetos Maven
     try {
         background = ImageIO.read(url);
-    } catch (IOException e) {
-    e.printStackTrace();
+    } 
+    catch (IOException e) {
+        e.printStackTrace();
     }
 }
 //aqui dizemos que, depois de o componente ser desenhado, desenhamos também a imagem sobre ele

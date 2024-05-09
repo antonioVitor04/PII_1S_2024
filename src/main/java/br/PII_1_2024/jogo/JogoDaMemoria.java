@@ -22,7 +22,7 @@ public class JogoDaMemoria extends javax.swing.JFrame{
     private long tempoInicial;
     private boolean virarPermitido = true;
     private JPanel backgroundImage;
-    private long tempoTotal;
+    private ActionListener jogoTerminadoListener;
 
     /**
      *
@@ -60,6 +60,7 @@ public class JogoDaMemoria extends javax.swing.JFrame{
         
         
     }
+    
 
     public void inicializarJogoMemoria(int numeroDePares, String nomeFase) {
         
@@ -105,6 +106,9 @@ public class JogoDaMemoria extends javax.swing.JFrame{
         // Registrar o tempo inicial
         tempoInicial = System.currentTimeMillis();
     }
+    
+    
+    
 
     public void virarCarta(Carta carta, int numeroDePares) {
             // Verificar se já foram encontrados todos os pares
@@ -138,8 +142,9 @@ public class JogoDaMemoria extends javax.swing.JFrame{
 
                 // Verificar se todos os pares foram encontrados
                 if (paresEncontrados == numeroDePares) {
-                    tempoTotal = (System.currentTimeMillis() - tempoInicial) / 1000;
+                    long tempoTotal = calcularTempoTotal();
                     JOptionPane.showMessageDialog(this, "PARABÉNS! VOCÊ COMPLETOU A FASE EM " + tempoTotal + " SEGUNDOS.", "FIM DA FASE", JOptionPane.INFORMATION_MESSAGE);
+                    onJogoTerminado();
                 }
                 
             } 
@@ -164,8 +169,22 @@ public class JogoDaMemoria extends javax.swing.JFrame{
             }
         }
     }
-    public long calcularTempoTotalJogo() {
+    public void setJogoTerminadoListener(ActionListener listener) {
+        this.jogoTerminadoListener = listener;
+    }
+    
+    private void onJogoTerminado() {
+        if (jogoTerminadoListener != null) {
+            jogoTerminadoListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+        }
+    }
+    
+    private long calcularTempoTotal() {
         return (System.currentTimeMillis() - tempoInicial) / 1000;
+    }
+
+    public long getTempoTotal() {
+        return calcularTempoTotal();
     }
 
     public Map<Integer, ImageIcon> carregarImagensCartas(int numeroDePares, String nomeFase) {
