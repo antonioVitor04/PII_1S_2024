@@ -4,6 +4,10 @@
  */
 package br.PII_1_2024.jogo;
 
+import br.PII_1_2024.db.AlunoFaseDAO;
+import br.PII_1_2024.modelo.AlunoFase;
+import java.awt.BorderLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,8 +17,10 @@ import java.awt.event.ActionListener;
  *
  * @author anton
  */
-public class FaseCasa extends javax.swing.JFrame {
+public class FaseCasa extends javax.swing.JFrame {     
     
+    private static int alunoAtual = LoginTelaAluno.codigoAluno;
+    private static AlunoFaseDAO dao = new AlunoFaseDAO();
     
            
     /**
@@ -22,7 +28,14 @@ public class FaseCasa extends javax.swing.JFrame {
      */
     public FaseCasa() {
         initComponents();
-  
+        setResizable(false);
+        setLocationRelativeTo(null);
+        TelaFundoJogo t = new
+            TelaFundoJogo(getClass().getResource("/images/ImagemFundoCasa.png"));
+        this.setContentPane(t);
+        this.setLayout(new BorderLayout());
+        t.add(telaFundoCasa);
+        this.pack();
         
     }
     
@@ -41,69 +54,83 @@ public class FaseCasa extends javax.swing.JFrame {
         iniciarSala = new javax.swing.JLabel();
         iniciarBanheiro = new javax.swing.JLabel();
         iniciarCozinha = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        telaFundoCasa.setOpaque(false);
+        telaFundoCasa.setPreferredSize(new java.awt.Dimension(1280, 718));
+
+        iniciarQuarto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoQuarto.png"))); // NOI18N
         iniciarQuarto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iniciarQuartoMouseClicked(evt);
             }
         });
 
+        iniciarSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoSala.png"))); // NOI18N
         iniciarSala.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iniciarSalaMouseClicked(evt);
             }
         });
 
+        iniciarBanheiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoBanheiro.png"))); // NOI18N
         iniciarBanheiro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iniciarBanheiroMouseClicked(evt);
             }
         });
 
+        iniciarCozinha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoCozinha.png"))); // NOI18N
         iniciarCozinha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iniciarCozinhaMouseClicked(evt);
             }
         });
 
+        jButton1.setText("Voltar");
+
         javax.swing.GroupLayout telaFundoCasaLayout = new javax.swing.GroupLayout(telaFundoCasa);
         telaFundoCasa.setLayout(telaFundoCasaLayout);
         telaFundoCasaLayout.setHorizontalGroup(
             telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telaFundoCasaLayout.createSequentialGroup()
-                .addContainerGap(243, Short.MAX_VALUE)
-                .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(iniciarBanheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                    .addComponent(iniciarQuarto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(171, 171, 171)
-                .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(iniciarSala, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                    .addComponent(iniciarCozinha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE)
+                .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iniciarQuarto)
+                    .addComponent(iniciarBanheiro))
+                .addGap(216, 216, 216)
+                .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(iniciarSala)
+                    .addComponent(iniciarCozinha))
+                .addGap(156, 156, 156))
+            .addGroup(telaFundoCasaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         telaFundoCasaLayout.setVerticalGroup(
             telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaFundoCasaLayout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
-                .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(telaFundoCasaLayout.createSequentialGroup()
-                        .addComponent(iniciarCozinha, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(iniciarSala, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(telaFundoCasaLayout.createSequentialGroup()
-                        .addComponent(iniciarBanheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84)
-                        .addComponent(iniciarQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(110, 110, 110))
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(iniciarBanheiro)
+                    .addComponent(iniciarCozinha))
+                .addGap(126, 126, 126)
+                .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iniciarQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iniciarSala, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(telaFundoCasa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(telaFundoCasa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,8 +148,16 @@ public class FaseCasa extends javax.swing.JFrame {
         jogoBanheiro.setJogoTerminadoListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                long tempoTotal = jogoBanheiro.getTempoTotal();
-                Utils.tempoFaseBanheiro = tempoTotal;               
+                long t = jogoBanheiro.getTempoTotal();
+                int tempoFase = Math.toIntExact(t);
+                new FaseCasa().setVisible(true);
+                try{
+                    AlunoFase alunoFase = new AlunoFase(9, alunoAtual, tempoFase);
+                    dao.inserirAlunoFase(alunoFase);
+                }
+                catch(Exception ev){
+                    ev.printStackTrace();
+                }
             }
         });
     }//GEN-LAST:event_iniciarBanheiroMouseClicked
@@ -132,7 +167,22 @@ public class FaseCasa extends javax.swing.JFrame {
         var jogoCozinha = new JogoDaMemoria("cozinha");
         jogoCozinha.inicializarJogoMemoria(8, "cozinha");
         jogoCozinha.setVisible(true);
-        
+        jogoCozinha.setJogoTerminadoListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long t = jogoCozinha.getTempoTotal();
+                int tempoFase = Math.toIntExact(t);
+                new FaseCasa().setVisible(true);
+                try{
+                    AlunoFase alunoFase = new AlunoFase(6, alunoAtual, tempoFase);
+                    dao.inserirAlunoFase(alunoFase);
+                }
+                catch(Exception ev){
+                    ev.printStackTrace();
+                }
+                
+            }
+        });
     }//GEN-LAST:event_iniciarCozinhaMouseClicked
 
     private void iniciarQuartoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarQuartoMouseClicked
@@ -140,7 +190,22 @@ public class FaseCasa extends javax.swing.JFrame {
         var jogoQuarto = new JogoDaMemoria("quarto");
         jogoQuarto.inicializarJogoMemoria(8, "quarto");
         jogoQuarto.setVisible(true);
-        
+        jogoQuarto.setJogoTerminadoListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long t = jogoQuarto.getTempoTotal();
+                int tempoFase = Math.toIntExact(t);
+                new FaseCasa().setVisible(true);
+                try{
+                    AlunoFase alunoFase = new AlunoFase(8, alunoAtual, tempoFase);
+                    dao.inserirAlunoFase(alunoFase);
+                }
+                catch(Exception ev){
+                    ev.printStackTrace();
+                }
+                
+            }
+        });
     }//GEN-LAST:event_iniciarQuartoMouseClicked
 
     private void iniciarSalaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarSalaMouseClicked
@@ -148,7 +213,22 @@ public class FaseCasa extends javax.swing.JFrame {
         var jogoSala = new JogoDaMemoria("sala");
         jogoSala.inicializarJogoMemoria(8, "sala");
         jogoSala.setVisible(true);
-        
+        jogoSala.setJogoTerminadoListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long t = jogoSala.getTempoTotal();
+                int tempoFase = Math.toIntExact(t);
+                new FaseCasa().setVisible(true);
+                try{
+                    AlunoFase alunoFase = new AlunoFase(7, alunoAtual, tempoFase);
+                    dao.inserirAlunoFase(alunoFase);
+                }
+                catch(Exception ev){
+                    ev.printStackTrace();
+                }
+                
+            }
+        });
     }//GEN-LAST:event_iniciarSalaMouseClicked
 
     /**
@@ -161,6 +241,7 @@ public class FaseCasa extends javax.swing.JFrame {
     private javax.swing.JLabel iniciarCozinha;
     private javax.swing.JLabel iniciarQuarto;
     private javax.swing.JLabel iniciarSala;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel telaFundoCasa;
     // End of variables declaration//GEN-END:variables
 }

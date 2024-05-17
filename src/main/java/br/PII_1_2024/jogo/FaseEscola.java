@@ -4,17 +4,32 @@
  */
 package br.PII_1_2024.jogo;
 
+import br.PII_1_2024.db.AlunoFaseDAO;
+import br.PII_1_2024.modelo.AlunoFase;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author anton
  */
 public class FaseEscola extends javax.swing.JFrame {
-
+    private static int alunoAtual = LoginTelaAluno.codigoAluno;
+    private static AlunoFaseDAO dao = new AlunoFaseDAO();
     /**
      * Creates new form FaseEscola
      */
     public FaseEscola() {
         initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        TelaFundoJogo t = new
+            TelaFundoJogo(getClass().getResource("/images/ImagemFundoEscola.png"));
+        this.setContentPane(t);
+        this.setLayout(new BorderLayout());
+        t.add(escola);
+        this.pack();
     }
 
     /**
@@ -26,54 +41,108 @@ public class FaseEscola extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        iniciarEscola = new javax.swing.JLabel();
+        escola = new javax.swing.JPanel();
+        iniciarEscolaAtividades = new javax.swing.JLabel();
+        iniciarEscolaMaterial = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        iniciarEscola.addMouseListener(new java.awt.event.MouseAdapter() {
+        escola.setOpaque(false);
+
+        iniciarEscolaAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoEscola.png"))); // NOI18N
+        iniciarEscolaAtividades.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                iniciarEscolaMouseClicked(evt);
+                iniciarEscolaAtividadesMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(405, 405, 405)
-                .addComponent(iniciarEscola, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(521, Short.MAX_VALUE))
+        iniciarEscolaMaterial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoMaterialEscola.png"))); // NOI18N
+        iniciarEscolaMaterial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                iniciarEscolaMaterialMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout escolaLayout = new javax.swing.GroupLayout(escola);
+        escola.setLayout(escolaLayout);
+        escolaLayout.setHorizontalGroup(
+            escolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escolaLayout.createSequentialGroup()
+                .addGap(189, 189, 189)
+                .addComponent(iniciarEscolaAtividades, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(148, 148, 148)
+                .addComponent(iniciarEscolaMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(243, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(263, Short.MAX_VALUE)
-                .addComponent(iniciarEscola, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(225, 225, 225))
+        escolaLayout.setVerticalGroup(
+            escolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escolaLayout.createSequentialGroup()
+                .addGap(255, 255, 255)
+                .addGroup(escolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iniciarEscolaAtividades)
+                    .addComponent(iniciarEscolaMaterial))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(escola, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(escola, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void iniciarEscolaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarEscolaMouseClicked
+    private void iniciarEscolaAtividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarEscolaAtividadesMouseClicked
         dispose();
-        var jogoEscola = new JogoDaMemoria("escola");
-        jogoEscola.inicializarJogoMemoria(8, "escola");
-        jogoEscola.setVisible(true);
-    }//GEN-LAST:event_iniciarEscolaMouseClicked
+        var jogoAtividades= new JogoDaMemoria("escola");
+        jogoAtividades.inicializarJogoMemoria(8, "escola");
+        jogoAtividades.setVisible(true);
+        jogoAtividades.setJogoTerminadoListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long t = jogoAtividades.getTempoTotal();
+                int tempoFaseAtividade = Math.toIntExact(t);
+                new FaseEscola().setVisible(true);
+                try{
+                    AlunoFase alunoFaseAtividades = new AlunoFase(4, alunoAtual, tempoFaseAtividade);
+                    dao.inserirAlunoFase(alunoFaseAtividades);
+                }
+                catch(Exception ev){
+                    ev.printStackTrace();
+                }
+                
+            }
+        });
+    }//GEN-LAST:event_iniciarEscolaAtividadesMouseClicked
+
+    private void iniciarEscolaMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarEscolaMaterialMouseClicked
+        dispose();
+        var jogoMaterial = new JogoDaMemoria("material");
+        jogoMaterial.inicializarJogoMemoria(8, "material");
+        jogoMaterial.setVisible(true);
+        jogoMaterial.setJogoTerminadoListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long t = jogoMaterial.getTempoTotal();
+                int tempoFase = Math.toIntExact(t);
+                new FaseEscola().setVisible(true);
+                try{
+                    AlunoFase alunoFase = new AlunoFase(3, alunoAtual, tempoFase);
+                    dao.inserirAlunoFase(alunoFase);
+                }
+                catch(Exception ev){
+                    ev.printStackTrace();
+                }
+                
+            }
+        });
+    }//GEN-LAST:event_iniciarEscolaMaterialMouseClicked
 
     /**
      * @param args the command line arguments
@@ -81,7 +150,8 @@ public class FaseEscola extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel iniciarEscola;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel escola;
+    private javax.swing.JLabel iniciarEscolaAtividades;
+    private javax.swing.JLabel iniciarEscolaMaterial;
     // End of variables declaration//GEN-END:variables
 }

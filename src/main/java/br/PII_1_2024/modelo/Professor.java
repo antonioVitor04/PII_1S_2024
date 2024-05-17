@@ -19,16 +19,26 @@ public class Professor {
         this.senha = senha;
     }
 
-    public Professor(int codigo, String senha) {
+    public Professor(int codigo, String nome) {
         this.codigo = codigo;
-        this.senha = senha;
+        this.nome = nome;
     }
     public Professor(String nome, String senha){
         this.nome = nome;
         this.senha = senha;
     }
-
-    public int getCodigo() {
+    public Professor(int codigo){
+        this.codigo = codigo;
+    }
+    
+    @Override
+    public String toString() {
+        return this.nome;
+    }
+   
+    
+    
+    public int getCodigo(){
         return codigo;
     }
 

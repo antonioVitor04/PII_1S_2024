@@ -4,17 +4,32 @@
  */
 package br.PII_1_2024.jogo;
 
+import br.PII_1_2024.db.AlunoFaseDAO;
+import br.PII_1_2024.modelo.AlunoFase;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author anton
  */
 public class FaseParquinho extends javax.swing.JFrame {
-
+    private static int alunoAtual = LoginTelaAluno.codigoAluno;
+    private static AlunoFaseDAO dao = new AlunoFaseDAO();
     /**
      * Creates new form FaseParquinho
      */
     public FaseParquinho() {
         initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        TelaFundoJogo t = new
+            TelaFundoJogo(getClass().getResource("/images/ImagemFundoParquinho.png"));
+        this.setContentPane(t);
+        this.setLayout(new BorderLayout());
+        t.add(parquinho);
+        this.pack();
     }
 
     /**
@@ -26,43 +41,46 @@ public class FaseParquinho extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        parquinho = new javax.swing.JPanel();
         iniciarParquinho = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        parquinho.setOpaque(false);
+
+        iniciarParquinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoParquinho.png"))); // NOI18N
         iniciarParquinho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iniciarParquinhoMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(439, 439, 439)
-                .addComponent(iniciarParquinho, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(511, Short.MAX_VALUE))
+        javax.swing.GroupLayout parquinhoLayout = new javax.swing.GroupLayout(parquinho);
+        parquinho.setLayout(parquinhoLayout);
+        parquinhoLayout.setHorizontalGroup(
+            parquinhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parquinhoLayout.createSequentialGroup()
+                .addContainerGap(471, Short.MAX_VALUE)
+                .addComponent(iniciarParquinho, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(459, 459, 459))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(223, 223, 223)
-                .addComponent(iniciarParquinho, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
+        parquinhoLayout.setVerticalGroup(
+            parquinhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(parquinhoLayout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(iniciarParquinho, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(294, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(parquinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(parquinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -73,6 +91,22 @@ public class FaseParquinho extends javax.swing.JFrame {
         var jogoParquinho = new JogoDaMemoria("parquinho");
         jogoParquinho.inicializarJogoMemoria(8, "parquinho");
         jogoParquinho.setVisible(true);
+        jogoParquinho.setJogoTerminadoListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long t = jogoParquinho.getTempoTotal();
+                int tempoFase = Math.toIntExact(t);
+                new FaseParquinho().setVisible(true);
+                try{
+                    AlunoFase alunoFase = new AlunoFase(1, alunoAtual, tempoFase);
+                    dao.inserirAlunoFase(alunoFase);
+                }
+                catch(Exception ev){
+                    ev.printStackTrace();
+                }
+                
+            }
+        });
     }//GEN-LAST:event_iniciarParquinhoMouseClicked
 
     /**
@@ -82,6 +116,6 @@ public class FaseParquinho extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel iniciarParquinho;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel parquinho;
     // End of variables declaration//GEN-END:variables
 }

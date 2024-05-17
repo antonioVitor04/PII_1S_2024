@@ -26,13 +26,13 @@ public class AlunoDAO {
         //5. Executar
         try(ResultSet rs= ps.executeQuery()){
         //6. Lidar com resultado
-            boolean achou = rs.next();
+            boolean alunoOK = rs.next();
         //7. Fechar a conexão
             rs.close();
             ps.close();
             con.close();
         //8. responder se existe ou não
-            return achou;
+            return alunoOK;
         }
         }
     }

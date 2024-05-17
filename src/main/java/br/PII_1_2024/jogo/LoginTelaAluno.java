@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -15,24 +15,24 @@ import javax.swing.JOptionPane;
  */
 public class LoginTelaAluno extends javax.swing.JFrame {
     private String nomeAluno;
+    public static int codigoAluno;
+    
     /**
      * Creates new form LoginTelaAluno
      */
     public LoginTelaAluno() {
         initComponents();
-        setLocationRelativeTo(null);       
-        TelaFundoJogo login = new
-            TelaFundoJogo(getClass().getResource(""));
-        this.setContentPane(login);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        TelaFundoJogo t = new
+            TelaFundoJogo(getClass().getResource("/images/telaLoginAluno.png"));
+        this.setContentPane(t);
         this.setLayout(new BorderLayout());
-        // Certifique-se de que todos os componentes são adicionados ao painel da imagem
-        login.add(imagemFundoLogin);
-        // Certifique-se de que a janela está corretamente dimensionada
+        t.add(imagemFundoLogin);
         this.pack();
     }
-    public String retornarLogin(){
-        return nomeAluno;
-    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +49,8 @@ public class LoginTelaAluno extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        imagemFundoLogin.setOpaque(false);
+
         entrarButton.setText("Entrar");
         entrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,23 +63,22 @@ public class LoginTelaAluno extends javax.swing.JFrame {
         imagemFundoLoginLayout.setHorizontalGroup(
             imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                .addGroup(imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                        .addGap(392, 392, 392)
-                        .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                        .addGap(488, 488, 488)
-                        .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(423, Short.MAX_VALUE))
+                .addGap(476, 476, 476)
+                .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, imagemFundoLoginLayout.createSequentialGroup()
+                .addContainerGap(383, Short.MAX_VALUE)
+                .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(352, 352, 352))
         );
         imagemFundoLoginLayout.setVerticalGroup(
             imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, imagemFundoLoginLayout.createSequentialGroup()
-                .addContainerGap(201, Short.MAX_VALUE)
-                .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134)
+                .addContainerGap(431, Short.MAX_VALUE)
+                .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
                 .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(174, 174, 174))
+                .addGap(133, 133, 133))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,20 +96,16 @@ public class LoginTelaAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarButtonActionPerformed
-        int alunoAtual;
         try{
             
             var login = nomeTextField.getText();
             var aluno = new Aluno(login);
-            nomeAluno = aluno.getNome();
             aluno.setNome(login);
             var dao = new AlunoDAO();
             if (dao.existe(aluno)){
-                JOptionPane.showMessageDialog (null, "Bem vindo, " +
-                nomeAluno + "!");
-                alunoAtual = dao.obterCodigo(aluno);
-                //Utils.alunoAtual = aluno;
-                // Utils.codigoAlunoAtual = resultSet.getInt("codigo");
+                JOptionPane.showMessageDialog (null, "Bem vindo, " 
+                        + aluno.getNome() + "!");
+                codigoAluno = dao.obterCodigo(aluno);
                 new HUBJogador().setVisible(true);
                 this.dispose();
             }
@@ -124,40 +121,11 @@ public class LoginTelaAluno extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_entrarButtonActionPerformed
     
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginTelaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginTelaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginTelaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginTelaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginTelaAluno().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton entrarButton;

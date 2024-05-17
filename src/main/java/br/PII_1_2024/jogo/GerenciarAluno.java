@@ -8,22 +8,37 @@ import br.PII_1_2024.modelo.Aluno;
 import br.PII_1_2024.db.AlunoDAO;
 import br.PII_1_2024.db.TurmaDAO;
 import br.PII_1_2024.modelo.Turma;
+import java.awt.BorderLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
  * @author anton
  */
 public class GerenciarAluno extends javax.swing.JFrame {
-
+    private Turma turmas;
     /**
      * Creates new form GerenciarAluno
      */
     public GerenciarAluno() {
-        initComponents();
+        try { 
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); 
+        } catch (Exception ex) { 
+            ex.printStackTrace(); 
+        }
+        initComponents();        
         buscarAlunos();
         buscarTurmas();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        TelaFundoJogo t = new
+            TelaFundoJogo(getClass().getResource("/images/TelaInicio.png"));
+        this.setContentPane(t);
+        this.setLayout(new BorderLayout());
+        t.add(gerenciarAluno);
+        this.pack();
     }
     private void buscarAlunos (){
     try{
@@ -32,7 +47,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
         alunosComboBox.setModel(new DefaultComboBoxModel<>(alunos));
     }
     catch (Exception e){
-        JOptionPane.showMessageDialog(null, "turmas indisponíveis, tente"
+        JOptionPane.showMessageDialog(null, "alunos indisponíveis, tente"
                 + "novamente mais tarde.");
         e.printStackTrace();
     }
@@ -41,8 +56,8 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private void buscarTurmas (){
     try{
         var dao = new TurmaDAO();
-        Turma [] turmas = dao.obterTurma();
-        turmasComboBox.setModel(new DefaultComboBoxModel<>(turmas));
+        Turma [] t = dao.obterTurma();
+        turmasComboBox.setModel(new DefaultComboBoxModel<>(t));
     }
     catch (Exception e){
         JOptionPane.showMessageDialog(null, "turmas indisponíveis, tente"
@@ -60,7 +75,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        gerenciarAluno = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         alunosComboBox = new javax.swing.JComboBox<>();
         nomeAlunoTextField = new javax.swing.JTextField();
@@ -70,11 +85,12 @@ public class GerenciarAluno extends javax.swing.JFrame {
         cancelarButton = new javax.swing.JButton();
         removerButton = new javax.swing.JButton();
         idAlunoTextField = new javax.swing.JTextField();
+        limparAlunoButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         turmasComboBox = new javax.swing.JComboBox<>();
         codigoTurmaTextField = new javax.swing.JTextField();
         nomeTurmaTextField = new javax.swing.JTextField();
-        limparTextoTextField = new javax.swing.JButton();
+        limparTurmaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,7 +100,16 @@ public class GerenciarAluno extends javax.swing.JFrame {
             }
         });
 
-        novoAlunoButton.setText("Novo aluno");
+        nomeAlunoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("aluno"));
+
+        turmaTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("codigo da turma"));
+        turmaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                turmaTextFieldActionPerformed(evt);
+            }
+        });
+
+        novoAlunoButton.setText("Novo ");
         novoAlunoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novoAlunoButtonActionPerformed(evt);
@@ -114,6 +139,14 @@ public class GerenciarAluno extends javax.swing.JFrame {
 
         idAlunoTextField.setEditable(false);
         idAlunoTextField.setToolTipText("");
+        idAlunoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("codigo do aluno"));
+
+        limparAlunoButton.setText("Limpar");
+        limparAlunoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limparAlunoButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -133,21 +166,22 @@ public class GerenciarAluno extends javax.swing.JFrame {
                         .addComponent(atualizarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(turmaTextField)
                     .addComponent(nomeAlunoTextField)
-                    .addComponent(alunosComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(alunosComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(limparAlunoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addComponent(alunosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(idAlunoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(nomeAlunoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(turmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(idAlunoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(nomeAlunoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(turmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(novoAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(atualizarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -155,7 +189,9 @@ public class GerenciarAluno extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(removerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(limparAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         turmasComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +201,16 @@ public class GerenciarAluno extends javax.swing.JFrame {
         });
 
         codigoTurmaTextField.setEditable(false);
+        codigoTurmaTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("codigo da turma"));
+
+        nomeTurmaTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("turma"));
+
+        limparTurmaButton.setText("Limpar");
+        limparTurmaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limparTurmaButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -173,10 +219,10 @@ public class GerenciarAluno extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(limparTurmaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                     .addComponent(nomeTurmaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(codigoTurmaTextField)
-                        .addComponent(turmasComboBox, 0, 256, Short.MAX_VALUE)))
+                    .addComponent(codigoTurmaTextField)
+                    .addComponent(turmasComboBox, 0, 256, Short.MAX_VALUE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -185,56 +231,44 @@ public class GerenciarAluno extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(turmasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(codigoTurmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(nomeTurmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addComponent(codigoTurmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(nomeTurmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(limparTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
-        limparTextoTextField.setText("Limpar");
-        limparTextoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limparTextoTextFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(496, 496, 496)
-                        .addComponent(limparTextoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(322, Short.MAX_VALUE))
+        javax.swing.GroupLayout gerenciarAlunoLayout = new javax.swing.GroupLayout(gerenciarAluno);
+        gerenciarAluno.setLayout(gerenciarAlunoLayout);
+        gerenciarAlunoLayout.setHorizontalGroup(
+            gerenciarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerenciarAlunoLayout.createSequentialGroup()
+                .addGap(265, 265, 265)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(292, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(limparTextoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+        gerenciarAlunoLayout.setVerticalGroup(
+            gerenciarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerenciarAlunoLayout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addGroup(gerenciarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gerenciarAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gerenciarAluno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -327,7 +361,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
                     + " SELECIONE UM ALUNO");
         }
         else{
-            int escolha = JOptionPane.showConfirmDialog(null, "Remover aluno?");
+            int escolha = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remove-lo?");
             if (escolha == JOptionPane.YES_OPTION){
                 try{
                     int idAluno = Integer.parseInt (idAlunoTextField.getText());
@@ -356,18 +390,25 @@ public class GerenciarAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void turmasComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turmasComboBoxActionPerformed
-        Turma turma = (Turma) turmasComboBox.getSelectedItem();
-        nomeTurmaTextField.setText(turma.getNome());
-        codigoTurmaTextField.setText(Integer.toString(turma.getCodigoTurma()));
+        turmas = (Turma) turmasComboBox.getSelectedItem();
+        nomeTurmaTextField.setText(turmas.getNome());
+        codigoTurmaTextField.setText(Integer.toString(turmas.getCodigoTurma()));
     }//GEN-LAST:event_turmasComboBoxActionPerformed
 
-    private void limparTextoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparTextoTextFieldActionPerformed
+    private void limparAlunoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparAlunoButtonActionPerformed
         nomeAlunoTextField.setText("");
         turmaTextField.setText("");
         idAlunoTextField.setText("");
+    }//GEN-LAST:event_limparAlunoButtonActionPerformed
+
+    private void turmaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turmaTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_turmaTextFieldActionPerformed
+
+    private void limparTurmaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparTurmaButtonActionPerformed
         nomeTurmaTextField.setText("");
         codigoTurmaTextField.setText("");
-    }//GEN-LAST:event_limparTextoTextFieldActionPerformed
+    }//GEN-LAST:event_limparTurmaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,11 +419,12 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private javax.swing.JButton atualizarButton;
     private javax.swing.JButton cancelarButton;
     private javax.swing.JTextField codigoTurmaTextField;
+    private javax.swing.JPanel gerenciarAluno;
     private javax.swing.JTextField idAlunoTextField;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JButton limparTextoTextField;
+    private javax.swing.JButton limparAlunoButton;
+    private javax.swing.JButton limparTurmaButton;
     private javax.swing.JTextField nomeAlunoTextField;
     private javax.swing.JTextField nomeTurmaTextField;
     private javax.swing.JButton novoAlunoButton;

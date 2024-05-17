@@ -4,17 +4,32 @@
  */
 package br.PII_1_2024.jogo;
 
+import br.PII_1_2024.db.AlunoFaseDAO;
+import br.PII_1_2024.modelo.AlunoFase;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author anton
  */
 public class FaseHospital extends javax.swing.JFrame {
-
+    private static int alunoAtual = LoginTelaAluno.codigoAluno;
+    private static AlunoFaseDAO dao = new AlunoFaseDAO();
     /**
      * Creates new form FaseHospital
      */
     public FaseHospital() {
         initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        TelaFundoJogo t = new
+            TelaFundoJogo(getClass().getResource("/images/ImagemFundoHospital.png"));
+        this.setContentPane(t);
+        this.setLayout(new BorderLayout());
+        t.add(hospital);
+        this.pack();
     }
 
     /**
@@ -26,65 +41,73 @@ public class FaseHospital extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        iniciarHospital = new javax.swing.JPanel();
+        hospital = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        iniciarHospital.addMouseListener(new java.awt.event.MouseAdapter() {
+        hospital.setOpaque(false);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoHospital.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                iniciarHospitalMouseClicked(evt);
+                jLabel1MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout iniciarHospitalLayout = new javax.swing.GroupLayout(iniciarHospital);
-        iniciarHospital.setLayout(iniciarHospitalLayout);
-        iniciarHospitalLayout.setHorizontalGroup(
-            iniciarHospitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
-        );
-        iniciarHospitalLayout.setVerticalGroup(
-            iniciarHospitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 251, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(454, 454, 454)
-                .addComponent(iniciarHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout hospitalLayout = new javax.swing.GroupLayout(hospital);
+        hospital.setLayout(hospitalLayout);
+        hospitalLayout.setHorizontalGroup(
+            hospitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hospitalLayout.createSequentialGroup()
+                .addGap(464, 464, 464)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(466, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(234, 234, 234)
-                .addComponent(iniciarHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(233, Short.MAX_VALUE))
+        hospitalLayout.setVerticalGroup(
+            hospitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hospitalLayout.createSequentialGroup()
+                .addGap(232, 232, 232)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(307, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(hospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(hospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void iniciarHospitalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarHospitalMouseClicked
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         dispose();
         var jogoHospital = new JogoDaMemoria("hospital");
         jogoHospital.inicializarJogoMemoria(8, "hospital");
         jogoHospital.setVisible(true);
-    }//GEN-LAST:event_iniciarHospitalMouseClicked
+        jogoHospital.setJogoTerminadoListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long t = jogoHospital.getTempoTotal();
+                int tempoFase = Math.toIntExact(t);
+                new FaseHospital().setVisible(true);
+                try{
+                    AlunoFase alunoFase = new AlunoFase(5, alunoAtual, tempoFase);
+                    dao.inserirAlunoFase(alunoFase);
+                }
+                catch(Exception ev){
+                    ev.printStackTrace();
+                }
+                
+            }
+        });
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -92,7 +115,7 @@ public class FaseHospital extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel iniciarHospital;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel hospital;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

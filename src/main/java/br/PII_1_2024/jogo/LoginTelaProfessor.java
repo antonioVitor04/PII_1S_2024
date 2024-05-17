@@ -13,7 +13,8 @@ import br.PII_1_2024.modelo.Professor;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 public class LoginTelaProfessor extends javax.swing.JFrame {
-    
+    private String nomeProfessor;
+    public static int codigoProfessor;
     /**
      * Creates new form LoginTela
      */
@@ -21,7 +22,7 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);       
         TelaFundoJogo login = new
-            TelaFundoJogo(getClass().getResource(""));
+            TelaFundoJogo(getClass().getResource("/images/telaLoginProfessor.png"));
         this.setContentPane(login);
         this.setLayout(new BorderLayout());
         // Certifique-se de que todos os componentes são adicionados ao painel da imagem
@@ -50,7 +51,7 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
 
         imagemFundoLogin.setOpaque(false);
 
-        cancelarButton.setText("Cancelar");
+        cancelarButton.setText("Voltar");
 
         entrarButton.setText("Entrar");
         entrarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -66,31 +67,31 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
             .addGroup(imagemFundoLoginLayout.createSequentialGroup()
                 .addGroup(imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                        .addGap(287, 287, 287)
-                        .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(350, 350, 350)
+                        .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                        .addGap(416, 416, 416)
-                        .addGroup(imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 462, Short.MAX_VALUE))
+                        .addGap(498, 498, 498)
+                        .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 503, Short.MAX_VALUE))
             .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                .addGap(517, 517, 517)
-                .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         imagemFundoLoginLayout.setVerticalGroup(
             imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
+                .addGap(122, 122, 122)
+                .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(132, 132, 132)
+                .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -120,6 +121,7 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
             if (dao.existe(professor)){
                 JOptionPane.showMessageDialog (null, "Bem vindo, " +
                 professor.getNome() + "!");
+                codigoProfessor = dao.obterCodigo(professor);
                 new HUBProfessor().setVisible(true);
                 this.dispose();
             }
@@ -139,38 +141,7 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginTelaProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginTelaProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginTelaProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginTelaProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginTelaProfessor().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;
