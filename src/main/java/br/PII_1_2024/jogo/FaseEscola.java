@@ -44,6 +44,7 @@ public class FaseEscola extends javax.swing.JFrame {
         escola = new javax.swing.JPanel();
         iniciarEscolaAtividades = new javax.swing.JLabel();
         iniciarEscolaMaterial = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,21 +64,35 @@ public class FaseEscola extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout escolaLayout = new javax.swing.GroupLayout(escola);
         escola.setLayout(escolaLayout);
         escolaLayout.setHorizontalGroup(
             escolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escolaLayout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addComponent(iniciarEscolaAtividades, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148)
-                .addComponent(iniciarEscolaMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(escolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escolaLayout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(iniciarEscolaAtividades, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(148, 148, 148)
+                        .addComponent(iniciarEscolaMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(escolaLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(243, Short.MAX_VALUE))
         );
         escolaLayout.setVerticalGroup(
             escolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escolaLayout.createSequentialGroup()
-                .addGap(255, 255, 255)
+                .addGap(72, 72, 72)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97)
                 .addGroup(escolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(iniciarEscolaAtividades)
                     .addComponent(iniciarEscolaMaterial))
@@ -100,14 +115,15 @@ public class FaseEscola extends javax.swing.JFrame {
 
     private void iniciarEscolaAtividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarEscolaAtividadesMouseClicked
         dispose();
-        var jogoAtividades= new JogoDaMemoria("escola");
-        jogoAtividades.inicializarJogoMemoria(8, "escola");
+        var jogoAtividades= new JogoDaMemoria("atividades");
+        jogoAtividades.inicializarJogoMemoria(8, "atividades");
         jogoAtividades.setVisible(true);
         jogoAtividades.setJogoTerminadoListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 long t = jogoAtividades.getTempoTotal();
                 int tempoFaseAtividade = Math.toIntExact(t);
+                jogoAtividades.dispose();
                 new FaseEscola().setVisible(true);
                 try{
                     AlunoFase alunoFaseAtividades = new AlunoFase(4, alunoAtual, tempoFaseAtividade);
@@ -131,6 +147,7 @@ public class FaseEscola extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 long t = jogoMaterial.getTempoTotal();
                 int tempoFase = Math.toIntExact(t);
+                jogoMaterial.dispose();
                 new FaseEscola().setVisible(true);
                 try{
                     AlunoFase alunoFase = new AlunoFase(3, alunoAtual, tempoFase);
@@ -144,6 +161,11 @@ public class FaseEscola extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_iniciarEscolaMaterialMouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        new TelaMapa().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -153,5 +175,6 @@ public class FaseEscola extends javax.swing.JFrame {
     private javax.swing.JPanel escola;
     private javax.swing.JLabel iniciarEscolaAtividades;
     private javax.swing.JLabel iniciarEscolaMaterial;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

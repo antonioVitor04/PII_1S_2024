@@ -54,7 +54,7 @@ public class FaseCasa extends javax.swing.JFrame {
         iniciarSala = new javax.swing.JLabel();
         iniciarBanheiro = new javax.swing.JLabel();
         iniciarCozinha = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,7 +89,12 @@ public class FaseCasa extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Voltar");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout telaFundoCasaLayout = new javax.swing.GroupLayout(telaFundoCasa);
         telaFundoCasa.setLayout(telaFundoCasaLayout);
@@ -107,15 +112,15 @@ public class FaseCasa extends javax.swing.JFrame {
                 .addGap(156, 156, 156))
             .addGroup(telaFundoCasaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         telaFundoCasaLayout.setVerticalGroup(
             telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaFundoCasaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(iniciarBanheiro)
                     .addComponent(iniciarCozinha))
@@ -123,7 +128,7 @@ public class FaseCasa extends javax.swing.JFrame {
                 .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(iniciarQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iniciarSala, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,6 +155,7 @@ public class FaseCasa extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 long t = jogoBanheiro.getTempoTotal();
                 int tempoFase = Math.toIntExact(t);
+                jogoBanheiro.dispose();
                 new FaseCasa().setVisible(true);
                 try{
                     AlunoFase alunoFase = new AlunoFase(9, alunoAtual, tempoFase);
@@ -172,6 +178,7 @@ public class FaseCasa extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 long t = jogoCozinha.getTempoTotal();
                 int tempoFase = Math.toIntExact(t);
+                jogoCozinha.dispose();
                 new FaseCasa().setVisible(true);
                 try{
                     AlunoFase alunoFase = new AlunoFase(6, alunoAtual, tempoFase);
@@ -195,6 +202,7 @@ public class FaseCasa extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 long t = jogoQuarto.getTempoTotal();
                 int tempoFase = Math.toIntExact(t);
+                jogoQuarto.dispose();
                 new FaseCasa().setVisible(true);
                 try{
                     AlunoFase alunoFase = new AlunoFase(8, alunoAtual, tempoFase);
@@ -209,7 +217,7 @@ public class FaseCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_iniciarQuartoMouseClicked
 
     private void iniciarSalaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarSalaMouseClicked
-        dispose();
+        this.dispose();
         var jogoSala = new JogoDaMemoria("sala");
         jogoSala.inicializarJogoMemoria(8, "sala");
         jogoSala.setVisible(true);
@@ -218,7 +226,8 @@ public class FaseCasa extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 long t = jogoSala.getTempoTotal();
                 int tempoFase = Math.toIntExact(t);
-                new FaseCasa().setVisible(true);
+                jogoSala.dispose();
+                new FaseCasa().setVisible(true);               
                 try{
                     AlunoFase alunoFase = new AlunoFase(7, alunoAtual, tempoFase);
                     dao.inserirAlunoFase(alunoFase);
@@ -231,6 +240,11 @@ public class FaseCasa extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_iniciarSalaMouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        new TelaMapa().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -241,7 +255,7 @@ public class FaseCasa extends javax.swing.JFrame {
     private javax.swing.JLabel iniciarCozinha;
     private javax.swing.JLabel iniciarQuarto;
     private javax.swing.JLabel iniciarSala;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel telaFundoCasa;
     // End of variables declaration//GEN-END:variables
 }

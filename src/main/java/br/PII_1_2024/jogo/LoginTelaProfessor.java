@@ -44,19 +44,24 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
         imagemFundoLogin = new javax.swing.JPanel();
         passwordTextField = new javax.swing.JPasswordField();
         loginTextField = new javax.swing.JTextField();
-        cancelarButton = new javax.swing.JButton();
-        entrarButton = new javax.swing.JButton();
+        voltarButton = new javax.swing.JLabel();
+        entrarButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         imagemFundoLogin.setOpaque(false);
 
-        cancelarButton.setText("Voltar");
+        voltarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar.png"))); // NOI18N
+        voltarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                voltarButtonMouseClicked(evt);
+            }
+        });
 
-        entrarButton.setText("Entrar");
-        entrarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entrarButtonActionPerformed(evt);
+        entrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoEntrar.png"))); // NOI18N
+        entrarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                entrarButtonMouseClicked(evt);
             }
         });
 
@@ -64,34 +69,34 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
         imagemFundoLogin.setLayout(imagemFundoLoginLayout);
         imagemFundoLoginLayout.setHorizontalGroup(
             imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, imagemFundoLoginLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(entrarButton)
+                .addGap(482, 482, 482))
             .addGroup(imagemFundoLoginLayout.createSequentialGroup()
                 .addGroup(imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(367, 367, 367)
+                        .addGroup(imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                        .addGap(498, 498, 498)
-                        .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 503, Short.MAX_VALUE))
-            .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(354, 354, 354)
+                        .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(411, Short.MAX_VALUE))
         );
         imagemFundoLoginLayout.setVerticalGroup(
             imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(132, 132, 132)
-                .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addGap(115, 115, 115)
+                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111)
+                .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73)
+                .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -108,8 +113,7 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void entrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarButtonActionPerformed
-
+    private void entrarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarButtonMouseClicked
         try{
             
             var login = loginTextField.getText();
@@ -135,8 +139,13 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog (null, "Problemas técnicos. Tente "
                     + "novamente mais tarde");
             e.printStackTrace();
-            }
-    }//GEN-LAST:event_entrarButtonActionPerformed
+        }
+    }//GEN-LAST:event_entrarButtonMouseClicked
+
+    private void voltarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarButtonMouseClicked
+        new TelaDeInicio().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_voltarButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -144,10 +153,10 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelarButton;
-    private javax.swing.JButton entrarButton;
+    private javax.swing.JLabel entrarButton;
     private javax.swing.JPanel imagemFundoLogin;
     private javax.swing.JTextField loginTextField;
     private javax.swing.JPasswordField passwordTextField;
+    private javax.swing.JLabel voltarButton;
     // End of variables declaration//GEN-END:variables
 }

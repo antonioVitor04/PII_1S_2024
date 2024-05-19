@@ -20,7 +20,7 @@ public class HUBProfessor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);        
         TelaFundoJogo t = new
-            TelaFundoJogo(getClass().getResource("/images/telaJogador.png"));
+            TelaFundoJogo(getClass().getResource("/images/telaInicial.png"));
         this.setContentPane(t);
         this.setLayout(new BorderLayout());
         t.add(fundo);
@@ -37,38 +37,48 @@ public class HUBProfessor extends javax.swing.JFrame {
     private void initComponents() {
 
         fundo = new javax.swing.JPanel();
-        consultarButton = new javax.swing.JButton();
-        gerenciarTurmaButton = new javax.swing.JButton();
-        gerenciarAlunoButton = new javax.swing.JButton();
-        gerenciarProfessoresButton = new javax.swing.JButton();
+        consultarButton = new javax.swing.JLabel();
+        gerenciarTurmaButton = new javax.swing.JLabel();
+        gerenciarProfessorButton = new javax.swing.JLabel();
+        gerenciarAlunosButton = new javax.swing.JLabel();
+        sairButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        consultarButton.setText("Consultar tempo");
-        consultarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultarButtonActionPerformed(evt);
+        fundo.setOpaque(false);
+
+        consultarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoConsultar.png"))); // NOI18N
+        consultarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                consultarButtonMouseClicked(evt);
             }
         });
 
-        gerenciarTurmaButton.setText("Gerenciar turma");
-        gerenciarTurmaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gerenciarTurmaButtonActionPerformed(evt);
+        gerenciarTurmaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoGerenciarTurma.png"))); // NOI18N
+        gerenciarTurmaButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gerenciarTurmaButtonMouseClicked(evt);
             }
         });
 
-        gerenciarAlunoButton.setText("Gerenciar alunos");
-        gerenciarAlunoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gerenciarAlunoButtonActionPerformed(evt);
+        gerenciarProfessorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoGerenciarProfessor.png"))); // NOI18N
+        gerenciarProfessorButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gerenciarProfessorButtonMouseClicked(evt);
             }
         });
 
-        gerenciarProfessoresButton.setText("Gerenciar Professores");
-        gerenciarProfessoresButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gerenciarProfessoresButtonActionPerformed(evt);
+        gerenciarAlunosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoGerenciarAluno.png"))); // NOI18N
+        gerenciarAlunosButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gerenciarAlunosButtonMouseClicked(evt);
+            }
+        });
+
+        sairButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoSair.png"))); // NOI18N
+        sairButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sairButtonMouseClicked(evt);
             }
         });
 
@@ -77,28 +87,35 @@ public class HUBProfessor extends javax.swing.JFrame {
         fundoLayout.setHorizontalGroup(
             fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fundoLayout.createSequentialGroup()
-                .addGap(415, 415, 415)
                 .addGroup(fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gerenciarAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gerenciarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97)
-                .addGroup(fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gerenciarProfessoresButton, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(consultarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(410, Short.MAX_VALUE))
+                    .addGroup(fundoLayout.createSequentialGroup()
+                        .addGap(417, 417, 417)
+                        .addGroup(fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(gerenciarTurmaButton)
+                            .addComponent(consultarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(gerenciarAlunosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(fundoLayout.createSequentialGroup()
+                        .addGap(427, 427, 427)
+                        .addComponent(gerenciarProfessorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(fundoLayout.createSequentialGroup()
+                        .addGap(458, 458, 458)
+                        .addComponent(sairButton)))
+                .addGap(0, 444, Short.MAX_VALUE))
         );
         fundoLayout.setVerticalGroup(
             fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fundoLayout.createSequentialGroup()
-                .addGap(264, 264, 264)
-                .addGroup(fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(consultarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gerenciarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gerenciarAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gerenciarProfessoresButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(256, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fundoLayout.createSequentialGroup()
+                .addContainerGap(172, Short.MAX_VALUE)
+                .addComponent(gerenciarTurmaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(consultarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(gerenciarAlunosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(gerenciarProfessorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(sairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(169, 169, 169))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,25 +132,30 @@ public class HUBProfessor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
+    private void consultarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarButtonMouseClicked
         new ConsultarTela().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_consultarButtonActionPerformed
+    }//GEN-LAST:event_consultarButtonMouseClicked
 
-    private void gerenciarTurmaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarTurmaButtonActionPerformed
+    private void gerenciarTurmaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarTurmaButtonMouseClicked
         new GerenciarTurma().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_gerenciarTurmaButtonActionPerformed
+    }//GEN-LAST:event_gerenciarTurmaButtonMouseClicked
 
-    private void gerenciarAlunoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarAlunoButtonActionPerformed
-        new GerenciarAluno().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_gerenciarAlunoButtonActionPerformed
-
-    private void gerenciarProfessoresButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarProfessoresButtonActionPerformed
+    private void gerenciarProfessorButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarProfessorButtonMouseClicked
         new GerenciarProfessor().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_gerenciarProfessoresButtonActionPerformed
+    }//GEN-LAST:event_gerenciarProfessorButtonMouseClicked
+
+    private void gerenciarAlunosButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarAlunosButtonMouseClicked
+        new GerenciarAluno().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_gerenciarAlunosButtonMouseClicked
+
+    private void sairButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairButtonMouseClicked
+        new LoginTelaProfessor().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_sairButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -142,10 +164,11 @@ public class HUBProfessor extends javax.swing.JFrame {
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton consultarButton;
+    private javax.swing.JLabel consultarButton;
     private javax.swing.JPanel fundo;
-    private javax.swing.JButton gerenciarAlunoButton;
-    private javax.swing.JButton gerenciarProfessoresButton;
-    private javax.swing.JButton gerenciarTurmaButton;
+    private javax.swing.JLabel gerenciarAlunosButton;
+    private javax.swing.JLabel gerenciarProfessorButton;
+    private javax.swing.JLabel gerenciarTurmaButton;
+    private javax.swing.JLabel sairButton;
     // End of variables declaration//GEN-END:variables
 }

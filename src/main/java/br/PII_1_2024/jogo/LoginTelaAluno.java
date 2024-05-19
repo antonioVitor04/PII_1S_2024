@@ -44,17 +44,25 @@ public class LoginTelaAluno extends javax.swing.JFrame {
     private void initComponents() {
 
         imagemFundoLogin = new javax.swing.JPanel();
-        entrarButton = new javax.swing.JButton();
         nomeTextField = new javax.swing.JTextField();
+        entrarButton = new javax.swing.JLabel();
+        voltarButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         imagemFundoLogin.setOpaque(false);
 
-        entrarButton.setText("Entrar");
-        entrarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entrarButtonActionPerformed(evt);
+        entrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoEntrar.png"))); // NOI18N
+        entrarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                entrarButtonMouseClicked(evt);
+            }
+        });
+
+        voltarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar.png"))); // NOI18N
+        voltarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                voltarButtonMouseClicked(evt);
             }
         });
 
@@ -62,23 +70,30 @@ public class LoginTelaAluno extends javax.swing.JFrame {
         imagemFundoLogin.setLayout(imagemFundoLoginLayout);
         imagemFundoLoginLayout.setHorizontalGroup(
             imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(imagemFundoLoginLayout.createSequentialGroup()
-                .addGap(476, 476, 476)
-                .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, imagemFundoLoginLayout.createSequentialGroup()
-                .addContainerGap(383, Short.MAX_VALUE)
+                .addContainerGap(375, Short.MAX_VALUE)
                 .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(352, 352, 352))
+                .addGap(360, 360, 360))
+            .addGroup(imagemFundoLoginLayout.createSequentialGroup()
+                .addGroup(imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(imagemFundoLoginLayout.createSequentialGroup()
+                        .addGap(480, 480, 480)
+                        .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(imagemFundoLoginLayout.createSequentialGroup()
+                        .addGap(355, 355, 355)
+                        .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         imagemFundoLoginLayout.setVerticalGroup(
             imagemFundoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, imagemFundoLoginLayout.createSequentialGroup()
-                .addContainerGap(431, Short.MAX_VALUE)
-                .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
-                .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(133, 133, 133))
+                .addGap(96, 96, 96)
+                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addComponent(entrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(216, 216, 216))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,7 +110,7 @@ public class LoginTelaAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void entrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarButtonActionPerformed
+    private void entrarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarButtonMouseClicked
         try{
             
             var login = nomeTextField.getText();
@@ -106,7 +121,7 @@ public class LoginTelaAluno extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog (null, "Bem vindo, " 
                         + aluno.getNome() + "!");
                 codigoAluno = dao.obterCodigo(aluno);
-                new HUBJogador().setVisible(true);
+                new HUBAluno().setVisible(true);
                 this.dispose();
             }
             else{
@@ -118,8 +133,13 @@ public class LoginTelaAluno extends javax.swing.JFrame {
             JOptionPane.showMessageDialog (null, "Problemas técnicos. Tente "
                     + "novamente mais tarde");
             e.printStackTrace();
-            }
-    }//GEN-LAST:event_entrarButtonActionPerformed
+        }
+    }//GEN-LAST:event_entrarButtonMouseClicked
+
+    private void voltarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarButtonMouseClicked
+        new TelaDeInicio().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_voltarButtonMouseClicked
     
     
     /**
@@ -128,8 +148,9 @@ public class LoginTelaAluno extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton entrarButton;
+    private javax.swing.JLabel entrarButton;
     private javax.swing.JPanel imagemFundoLogin;
     private javax.swing.JTextField nomeTextField;
+    private javax.swing.JLabel voltarButton;
     // End of variables declaration//GEN-END:variables
 }

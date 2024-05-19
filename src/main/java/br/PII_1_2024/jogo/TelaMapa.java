@@ -41,6 +41,7 @@ public class TelaMapa extends javax.swing.JFrame {
         iniciarParquinho = new javax.swing.JLabel();
         iniciarEscola = new javax.swing.JLabel();
         iniciarRestaurante = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,18 +77,27 @@ public class TelaMapa extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout telaDeFundoFasesLayout = new javax.swing.GroupLayout(telaDeFundoFases);
         telaDeFundoFases.setLayout(telaDeFundoFasesLayout);
         telaDeFundoFasesLayout.setHorizontalGroup(
             telaDeFundoFasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telaDeFundoFasesLayout.createSequentialGroup()
-                .addGroup(telaDeFundoFasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(telaDeFundoFasesLayout.createSequentialGroup()
+                .addGroup(telaDeFundoFasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, telaDeFundoFasesLayout.createSequentialGroup()
                         .addGap(227, 227, 227)
                         .addComponent(iniciarParquinho, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaDeFundoFasesLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(telaDeFundoFasesLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(telaDeFundoFasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(iniciarCasaBanheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaDeFundoFasesLayout.createSequentialGroup()
@@ -107,15 +117,21 @@ public class TelaMapa extends javax.swing.JFrame {
             .addGroup(telaDeFundoFasesLayout.createSequentialGroup()
                 .addGroup(telaDeFundoFasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(telaDeFundoFasesLayout.createSequentialGroup()
-                        .addContainerGap(82, Short.MAX_VALUE)
-                        .addComponent(iniciarCasaBanheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(iniciarEscola, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))
-                    .addGroup(telaDeFundoFasesLayout.createSequentialGroup()
                         .addGap(97, 97, 97)
                         .addComponent(iniciarHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(telaDeFundoFasesLayout.createSequentialGroup()
+                        .addGroup(telaDeFundoFasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(telaDeFundoFasesLayout.createSequentialGroup()
+                                .addContainerGap(82, Short.MAX_VALUE)
+                                .addComponent(iniciarCasaBanheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(telaDeFundoFasesLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(iniciarEscola, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)))
                 .addGroup(telaDeFundoFasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(iniciarParquinho, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iniciarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,6 +187,11 @@ public class TelaMapa extends javax.swing.JFrame {
         faseRestaurante.setVisible(true);
     }//GEN-LAST:event_iniciarRestauranteMouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        new HUBAluno().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -182,6 +203,7 @@ public class TelaMapa extends javax.swing.JFrame {
     private javax.swing.JLabel iniciarHospital;
     private javax.swing.JLabel iniciarParquinho;
     private javax.swing.JLabel iniciarRestaurante;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel telaDeFundoFases;
     // End of variables declaration//GEN-END:variables
 }

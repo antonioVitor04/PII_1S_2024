@@ -85,7 +85,7 @@ public class JogoDaMemoria extends javax.swing.JFrame{
         
         
         for (Carta carta : cartas) {
-            carta.setPreferredSize(new Dimension(180, 180));
+            carta.setPreferredSize(new Dimension(200, 200));
             carta.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if (!carta.isVirada()) {
@@ -192,7 +192,7 @@ public class JogoDaMemoria extends javax.swing.JFrame{
         // Carregar as imagens necessárias para as cartas (substitua os caminhos pelas suas imagens)
         int i = 1;
         while(i <= numeroDePares){
-        imagensCartas.put(i, new ImageIcon("src/main/resources/images/"+nomeFase+"Carta"+i+".png"));
+        imagensCartas.put(i, new ImageIcon("src/main/resources/cartas/"+nomeFase+"Carta"+i+".png"));
         i++;
         }
         // Adicionar as imagens para os outros números de carta...

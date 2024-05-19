@@ -43,6 +43,7 @@ public class FaseRestaurante extends javax.swing.JFrame {
 
         restaurante = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +56,13 @@ public class FaseRestaurante extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar2.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout restauranteLayout = new javax.swing.GroupLayout(restaurante);
         restaurante.setLayout(restauranteLayout);
         restauranteLayout.setHorizontalGroup(
@@ -63,11 +71,17 @@ public class FaseRestaurante extends javax.swing.JFrame {
                 .addContainerGap(473, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(457, 457, 457))
+            .addGroup(restauranteLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         restauranteLayout.setVerticalGroup(
             restauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(restauranteLayout.createSequentialGroup()
-                .addGap(253, 253, 253)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(286, Short.MAX_VALUE))
         );
@@ -88,14 +102,15 @@ public class FaseRestaurante extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         dispose();
-        var jogoRestaurante = new JogoDaMemoria("parquinho");
-        jogoRestaurante.inicializarJogoMemoria(8, "parquinho");
+        var jogoRestaurante = new JogoDaMemoria("restaurante");
+        jogoRestaurante.inicializarJogoMemoria(10, "restaurante");
         jogoRestaurante.setVisible(true);
         jogoRestaurante.setJogoTerminadoListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 long t = jogoRestaurante.getTempoTotal();
                 int tempoFase = Math.toIntExact(t);
+                jogoRestaurante.dispose();
                 new FaseRestaurante().setVisible(true);
                 try{
                     AlunoFase alunoFase = new AlunoFase(2, alunoAtual, tempoFase);
@@ -109,6 +124,11 @@ public class FaseRestaurante extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        new TelaMapa().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -116,6 +136,7 @@ public class FaseRestaurante extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel restaurante;
     // End of variables declaration//GEN-END:variables
 }

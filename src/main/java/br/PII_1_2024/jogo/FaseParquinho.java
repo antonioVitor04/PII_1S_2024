@@ -43,6 +43,7 @@ public class FaseParquinho extends javax.swing.JFrame {
 
         parquinho = new javax.swing.JPanel();
         iniciarParquinho = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +56,13 @@ public class FaseParquinho extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout parquinhoLayout = new javax.swing.GroupLayout(parquinho);
         parquinho.setLayout(parquinhoLayout);
         parquinhoLayout.setHorizontalGroup(
@@ -63,11 +71,17 @@ public class FaseParquinho extends javax.swing.JFrame {
                 .addContainerGap(471, Short.MAX_VALUE)
                 .addComponent(iniciarParquinho, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(459, 459, 459))
+            .addGroup(parquinhoLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         parquinhoLayout.setVerticalGroup(
             parquinhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(parquinhoLayout.createSequentialGroup()
-                .addGap(245, 245, 245)
+                .addGap(58, 58, 58)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96)
                 .addComponent(iniciarParquinho, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(294, Short.MAX_VALUE))
         );
@@ -89,13 +103,14 @@ public class FaseParquinho extends javax.swing.JFrame {
     private void iniciarParquinhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarParquinhoMouseClicked
         dispose();
         var jogoParquinho = new JogoDaMemoria("parquinho");
-        jogoParquinho.inicializarJogoMemoria(8, "parquinho");
+        jogoParquinho.inicializarJogoMemoria(10, "parquinho");
         jogoParquinho.setVisible(true);
         jogoParquinho.setJogoTerminadoListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 long t = jogoParquinho.getTempoTotal();
                 int tempoFase = Math.toIntExact(t);
+                jogoParquinho.dispose();
                 new FaseParquinho().setVisible(true);
                 try{
                     AlunoFase alunoFase = new AlunoFase(1, alunoAtual, tempoFase);
@@ -109,6 +124,11 @@ public class FaseParquinho extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_iniciarParquinhoMouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        new TelaMapa().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -116,6 +136,7 @@ public class FaseParquinho extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel iniciarParquinho;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel parquinho;
     // End of variables declaration//GEN-END:variables
 }

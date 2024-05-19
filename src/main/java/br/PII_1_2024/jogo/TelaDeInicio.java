@@ -27,7 +27,7 @@ public class TelaDeInicio extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         TelaFundoJogo t = new
-            TelaFundoJogo(getClass().getResource("/images/TelaInicio.png"));
+            TelaFundoJogo(getClass().getResource("/images/telaInicial.png"));
         this.setContentPane(t);
         this.setLayout(new BorderLayout());
         t.add(inicio);
@@ -72,19 +72,19 @@ public class TelaDeInicio extends javax.swing.JFrame {
             .addGroup(inicioLayout.createSequentialGroup()
                 .addGroup(inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inicioLayout.createSequentialGroup()
-                        .addGap(437, 437, 437)
-                        .addComponent(jLabel1))
+                        .addGap(398, 398, 398)
+                        .addComponent(botaoProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(inicioLayout.createSequentialGroup()
-                        .addGap(368, 368, 368)
-                        .addComponent(botaoProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(459, Short.MAX_VALUE))
+                        .addGap(464, 464, 464)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(384, Short.MAX_VALUE))
         );
         inicioLayout.setVerticalGroup(
             inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inicioLayout.createSequentialGroup()
-                .addContainerGap(228, Short.MAX_VALUE)
+                .addContainerGap(213, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(66, 66, 66)
                 .addComponent(botaoProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(214, 214, 214))
         );
