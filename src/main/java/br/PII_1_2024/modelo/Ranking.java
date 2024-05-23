@@ -14,7 +14,7 @@ public class Ranking {
     private String nomeAluno;
     private String nomeTurma;
     private String nomeFase;
-    private Time tempoFase;
+    private Time tempoCompletado;
     
     public Ranking(String nomeAluno, 
             String nomeTurma, 
@@ -24,7 +24,7 @@ public class Ranking {
         this.nomeAluno = nomeAluno;
         this.nomeFase = nomeFase;
         this.nomeTurma = nomeTurma;
-        this.tempoFase = tempoFase;
+        this.tempoCompletado = tempoFase;
     }
 
     public String getNomeAluno() {
@@ -51,11 +51,11 @@ public class Ranking {
         this.nomeFase = nomeFase;
     }
 
-    public Time getTempoFase() {
-        return tempoFase;
+    public Time getTempoCompletado() {
+        return tempoCompletado;
     }
 
-    public void setTempoFase(Time tempoFase) {
-        this.tempoFase = tempoFase;
+    public void setTempoFase(Time tempoCompletado) {
+        this.tempoCompletado = tempoCompletado;
     }
 }

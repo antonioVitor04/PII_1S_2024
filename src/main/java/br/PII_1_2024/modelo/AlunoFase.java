@@ -11,9 +11,9 @@ import java.sql.Time;
  * @author anton
  */
 public class AlunoFase {
-    int codigoFase;
-    int codigoAluno;
-    int tempoCompletado;
+    private int codigoFase;
+    private int codigoAluno;
+    private int tempoCompletado;
     
     public AlunoFase(int codigoFase, int codigoAluno, int tempoCompletado){
         this.codigoFase = codigoFase;

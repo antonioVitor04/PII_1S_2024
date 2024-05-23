@@ -10,13 +10,13 @@ package br.PII_1_2024.modelo;
  */
 public class Aluno{
 
-    int codigo;
+    int codigoAluno;
     String nome;
     int codigoTurma;
     String turma;
     
-    public Aluno(int codigo, String nome, int codigoTurma) {
-        this.codigo = codigo;
+    public Aluno(int codigoAluno, String nome, int codigoTurma) {
+        this.codigoAluno = codigoAluno;
         this.nome = nome;
         this.codigoTurma = codigoTurma;
     }
@@ -26,8 +26,8 @@ public class Aluno{
         this.codigoTurma = codigoTurma;
     }
 
-    public Aluno(int codigo) {
-        this.codigo = codigo;
+    public Aluno(int codigoAluno) {
+        this.codigoAluno = codigoAluno;
     }
     public Aluno(String nome) {
         this.nome = nome;
@@ -46,12 +46,12 @@ public class Aluno{
         this.codigoTurma = codigoTurma;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getCodigoAluno() {
+        return codigoAluno;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodigo(int codigoAluno) {
+        this.codigoAluno = codigoAluno;
     }
 
     public String getNome() {

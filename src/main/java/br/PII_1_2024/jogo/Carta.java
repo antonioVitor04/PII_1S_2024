@@ -16,12 +16,14 @@ public class Carta extends JButton {
     private ImageIcon imagemVirada;
     private ImageIcon imagemPadrao;
     private boolean virada;
+    private AudioCurto clipPlayer;
 
     public Carta(int numero, ImageIcon imagemVirada) {
         this.numero = numero;
         this.imagemVirada = imagemVirada;
         this.imagemPadrao = new ImageIcon("src/main/resources/images/ImagemPadrao.png"); // Caminho da imagem de carta virada para baixo
         this.virada = false;
+        clipPlayer = new AudioCurto("src/main/resources/audio/cartaSound.mp3");
 
         // Definir a imagem padrão (carta virada para baixo)
         setIcon(imagemPadrao);
@@ -29,6 +31,7 @@ public class Carta extends JButton {
 
     public void virar() {
         if (!virada) {
+            clipPlayer.playSound();
             setIcon(imagemVirada); // Mostra a imagem da carta virada para cima
             virada = true;
         } else {

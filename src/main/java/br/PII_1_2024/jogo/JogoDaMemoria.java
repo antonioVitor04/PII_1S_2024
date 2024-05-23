@@ -23,12 +23,13 @@ public class JogoDaMemoria extends javax.swing.JFrame{
     private boolean virarPermitido = true;
     private JPanel backgroundImage;
     private ActionListener jogoTerminadoListener;
+    
 
     /**
      *
      * @param nomeFase
      */
-    public JogoDaMemoria(String nomeFase) {
+    public JogoDaMemoria(String nomeFase, String imagem) {       
         super("jogo da memória - fase: " +nomeFase);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,7 +44,7 @@ public class JogoDaMemoria extends javax.swing.JFrame{
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 // Desenhar a imagem de fundo
-                ImageIcon backgroundImage = new ImageIcon("src/main/resources/images/ImagemDeFases.jpg"); // Substitua o caminho pela sua imagem de fundo
+                ImageIcon backgroundImage = new ImageIcon("src/main/resources/images/"+imagem); // Substitua o caminho pela sua imagem de fundo
                 Image image = backgroundImage.getImage();
                 g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             }
@@ -142,8 +143,8 @@ public class JogoDaMemoria extends javax.swing.JFrame{
 
                 // Verificar se todos os pares foram encontrados
                 if (paresEncontrados == numeroDePares) {
-                    long tempoTotal = calcularTempoTotal();
-                    JOptionPane.showMessageDialog(this, "PARABÉNS! VOCÊ COMPLETOU A FASE EM " + tempoTotal + " SEGUNDOS.", "FIM DA FASE", JOptionPane.INFORMATION_MESSAGE);
+                    // long tempoTotal = calcularTempoTotal();
+                    // JOptionPane.showMessageDialog(this, "PARABÉNS! VOCÊ COMPLETOU A FASE EM " + tempoTotal + " SEGUNDOS.", "FIM DA FASE", JOptionPane.INFORMATION_MESSAGE);
                     onJogoTerminado();
                 }
                 
