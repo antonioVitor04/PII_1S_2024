@@ -23,6 +23,7 @@ public class JogoDaMemoria extends javax.swing.JFrame{
     private boolean virarPermitido = true;
     private JPanel backgroundImage;
     private ActionListener jogoTerminadoListener;
+    private JPanel cartasPainel;
     
 
     /**
@@ -81,7 +82,7 @@ public class JogoDaMemoria extends javax.swing.JFrame{
         // Embaralhar as cartas
         Collections.shuffle(cartas);
         
-        JPanel cartasPainel = new JPanel(new GridLayout(4, 4, 10, 10));
+        cartasPainel = new JPanel(new GridLayout(4, 4, 10, 10));
         cartasPainel.setOpaque(false);
         
         
@@ -137,24 +138,28 @@ public class JogoDaMemoria extends javax.swing.JFrame{
             // Verificar se as cartas formam um par
             if (carta.getNumero() == cartaSelecionada.getNumero()) {
                 paresEncontrados++;
-                carta.setEnabled(false);
-                cartaSelecionada.setEnabled(false);
+                int index1 = cartasPainel.getComponentZOrder(carta);
+                int index2 = cartasPainel.getComponentZOrder(cartaSelecionada);
+
+                cartasPainel.remove(carta);
+                cartasPainel.add(new JLabel(), index1);
+
+                cartasPainel.remove(cartaSelecionada);
+                cartasPainel.add(new JLabel(), index2);
                 cartaSelecionada = null; // Limpar a carta selecionada
 
                 // Verificar se todos os pares foram encontrados
                 if (paresEncontrados == numeroDePares) {
-                    // long tempoTotal = calcularTempoTotal();
-                    // JOptionPane.showMessageDialog(this, "PARABÉNS! VOCÊ COMPLETOU A FASE EM " + tempoTotal + " SEGUNDOS.", "FIM DA FASE", JOptionPane.INFORMATION_MESSAGE);
                     onJogoTerminado();
                 }
-                
+                    
             } 
             else {
                 // Impedir virar de outras cartas até que o tempo de espera termine
                 virarPermitido = false;
 
                 // Aguardar um momento e desvirar as cartas
-                Timer timer = new Timer(1000, new ActionListener() {
+                Timer timer2 = new Timer(1000, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         carta.virar(); // Desvirar a carta clicada
                         cartaSelecionada.virar(); // Desvirar a carta previamente selecionada
@@ -165,8 +170,8 @@ public class JogoDaMemoria extends javax.swing.JFrame{
                         cartaSelecionada = null; // Limpar a carta selecionada
                     }
                 });
-                timer.setRepeats(false);
-                timer.start();
+                timer2.setRepeats(false);
+                timer2.start();
             }
         }
     }
