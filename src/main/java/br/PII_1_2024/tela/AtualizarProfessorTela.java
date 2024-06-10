@@ -181,7 +181,7 @@ public class AtualizarProfessorTela extends javax.swing.JFrame {
         
         String nomeProfessor = nomeProfessorTextField.getText();
         String senhaProfessor = senhaProfessorTextField.getText();
-        if (nomeProfessor == null || nomeProfessor.length() == 0 && senhaProfessor.length() < 8){
+        if (nomeProfessor == null || nomeProfessor.length() == 0 && senhaProfessor.length() == 0 || senhaProfessor.length() < 8){
             
             JOptionPane.showMessageDialog(null, "ERRO. DIGITE AS CREDENCIAIS CORRETAS");
         }
