@@ -87,10 +87,10 @@ public class AlunoDAO {
     public void inserirAluno (Aluno aluno) throws Exception{
         String sql = "INSERT INTO tb_aluno (nome_aluno, turma) VALUES (?,?);";
         try (Connection con = ConexaoBD.obterConexao();
-        PreparedStatement ps = con.prepareStatement(sql)){
-        ps.setString(1, aluno.getNome());
-        ps.setInt(2, aluno.getCodigoTurma());
-        ps.execute();
+            PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setString(1, aluno.getNome());
+            ps.setInt(2, aluno.getCodigoTurma());
+            ps.execute();
         }
     }
     public void atualizarAluno (Aluno aluno) throws Exception{

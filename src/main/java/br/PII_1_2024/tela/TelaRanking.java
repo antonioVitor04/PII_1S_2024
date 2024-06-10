@@ -33,9 +33,9 @@ public class TelaRanking extends javax.swing.JFrame {
         this.setLayout(new BorderLayout());
         t.add(fundo);
         this.pack();
-        codigoTurmaTextField.setText(Integer.toString(turma.getCodigoTurma()));
-        nomeTurmaTextField.setText(turma.getNome());
-        nomeFaseTextField.setText(fase.getNome());
+        //codigoTurmaTextField.setText(Integer.toString(turma.getCodigoTurma()));
+        //nomeTurmaTextField.setText(turma.getNome());
+        //nomeFaseTextField.setText(fase.getNome());
         setLocationRelativeTo(null);
         try{
             this.alunosTable.setModel(new RankingTableModel(turma, fase));
@@ -57,9 +57,6 @@ public class TelaRanking extends javax.swing.JFrame {
     private void initComponents() {
 
         fundo = new javax.swing.JPanel();
-        codigoTurmaTextField = new javax.swing.JTextField();
-        nomeTurmaTextField = new javax.swing.JTextField();
-        nomeFaseTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         alunosTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -67,17 +64,6 @@ public class TelaRanking extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         fundo.setOpaque(false);
-
-        codigoTurmaTextField.setEditable(false);
-
-        nomeTurmaTextField.setEditable(false);
-
-        nomeFaseTextField.setEditable(false);
-        nomeFaseTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeFaseTextFieldActionPerformed(evt);
-            }
-        });
 
         alunosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,32 +117,20 @@ public class TelaRanking extends javax.swing.JFrame {
         fundo.setLayout(fundoLayout);
         fundoLayout.setHorizontalGroup(
             fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fundoLayout.createSequentialGroup()
+                .addContainerGap(205, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(187, 187, 187))
             .addGroup(fundoLayout.createSequentialGroup()
-                .addGap(298, 298, 298)
-                .addGroup(fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(fundoLayout.createSequentialGroup()
-                        .addComponent(codigoTurmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(nomeTurmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(nomeFaseTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
-                .addGap(268, 268, 268))
-            .addGroup(fundoLayout.createSequentialGroup()
-                .addGap(496, 496, 496)
+                .addGap(486, 486, 486)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         fundoLayout.setVerticalGroup(
             fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fundoLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addGroup(fundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(codigoTurmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomeTurmaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomeFaseTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(185, 185, 185)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
@@ -176,10 +150,6 @@ public class TelaRanking extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nomeFaseTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFaseTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeFaseTextFieldActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new ConsultarTela().setVisible(true);
         this.dispose();
@@ -192,11 +162,8 @@ public class TelaRanking extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable alunosTable;
-    private javax.swing.JTextField codigoTurmaTextField;
     private javax.swing.JPanel fundo;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nomeFaseTextField;
-    private javax.swing.JTextField nomeTurmaTextField;
     // End of variables declaration//GEN-END:variables
 }

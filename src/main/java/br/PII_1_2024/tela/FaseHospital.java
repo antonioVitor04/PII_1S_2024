@@ -5,6 +5,7 @@
 package br.PII_1_2024.tela;
 
 import br.PII_1_2024.bd.AlunoFaseDAO;
+import br.PII_1_2024.jogo.AudioCurto;
 import br.PII_1_2024.jogo.JogoDaMemoria;
 import br.PII_1_2024.jogo.TelaFundoJogo;
 import br.PII_1_2024.modelo.AlunoFase;
@@ -17,6 +18,7 @@ import java.awt.event.ActionListener;
  * @author anton
  */
 public class FaseHospital extends javax.swing.JFrame {
+    private AudioCurto clipPlayer;
     private static int alunoAtual = LoginTelaAluno.codigoAluno;
     private static AlunoFaseDAO dao = new AlunoFaseDAO();
     /**
@@ -24,6 +26,7 @@ public class FaseHospital extends javax.swing.JFrame {
      */
     public FaseHospital() {
         initComponents();
+        clipPlayer = new AudioCurto("src/main/resources/audio/botaoSound.mp3");
         setResizable(false);
         setLocationRelativeTo(null);
         TelaFundoJogo t = new
@@ -45,7 +48,7 @@ public class FaseHospital extends javax.swing.JFrame {
 
         hospital = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        voltarButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,10 +61,10 @@ public class FaseHospital extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar2.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        voltarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar2.png"))); // NOI18N
+        voltarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                voltarButtonMouseClicked(evt);
             }
         });
 
@@ -76,14 +79,14 @@ public class FaseHospital extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(hospitalLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jLabel2)))
+                        .addComponent(voltarButton)))
                 .addContainerGap(466, Short.MAX_VALUE))
         );
         hospitalLayout.setVerticalGroup(
             hospitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(hospitalLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(112, 112, 112)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(307, Short.MAX_VALUE))
@@ -104,6 +107,7 @@ public class FaseHospital extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        clipPlayer.playSound();
         dispose();
         var jogoHospital = new JogoDaMemoria("hospital", "imagemHospital.png");
         jogoHospital.inicializarJogoMemoria(8, "hospital");
@@ -129,10 +133,11 @@ public class FaseHospital extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void voltarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarButtonMouseClicked
+        clipPlayer.playSound();
         new TelaMapa().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_voltarButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -142,6 +147,6 @@ public class FaseHospital extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel hospital;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel voltarButton;
     // End of variables declaration//GEN-END:variables
 }

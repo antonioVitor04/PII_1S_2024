@@ -5,6 +5,7 @@
 package br.PII_1_2024.tela;
 
 import br.PII_1_2024.bd.AlunoFaseDAO;
+import br.PII_1_2024.jogo.AudioCurto;
 import br.PII_1_2024.jogo.JogoDaMemoria;
 import br.PII_1_2024.jogo.TelaFundoJogo;
 import br.PII_1_2024.modelo.AlunoFase;
@@ -17,6 +18,7 @@ import java.awt.event.ActionListener;
  * @author anton
  */
 public class FaseEscola extends javax.swing.JFrame {
+    private AudioCurto clipPlayer;
     private static int alunoAtual = LoginTelaAluno.codigoAluno;
     private static AlunoFaseDAO dao = new AlunoFaseDAO();
     /**
@@ -24,6 +26,7 @@ public class FaseEscola extends javax.swing.JFrame {
      */
     public FaseEscola() {
         initComponents();
+        clipPlayer = new AudioCurto("src/main/resources/audio/botaoSound.mp3");
         setResizable(false);
         setLocationRelativeTo(null);
         TelaFundoJogo t = new
@@ -46,7 +49,7 @@ public class FaseEscola extends javax.swing.JFrame {
         escola = new javax.swing.JPanel();
         iniciarEscolaAtividades = new javax.swing.JLabel();
         iniciarEscolaMaterial = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        voltarButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,10 +69,10 @@ public class FaseEscola extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        voltarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar.png"))); // NOI18N
+        voltarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                voltarButtonMouseClicked(evt);
             }
         });
 
@@ -86,14 +89,14 @@ public class FaseEscola extends javax.swing.JFrame {
                         .addComponent(iniciarEscolaMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(escolaLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(243, Short.MAX_VALUE))
         );
         escolaLayout.setVerticalGroup(
             escolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escolaLayout.createSequentialGroup()
                 .addGap(72, 72, 72)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(97, 97, 97)
                 .addGroup(escolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(iniciarEscolaAtividades)
@@ -116,6 +119,7 @@ public class FaseEscola extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarEscolaAtividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarEscolaAtividadesMouseClicked
+        clipPlayer.playSound();
         dispose();
         var jogoAtividades= new JogoDaMemoria("atividades", "imagemAtividades.png");
         jogoAtividades.inicializarJogoMemoria(8, "atividades");
@@ -141,6 +145,7 @@ public class FaseEscola extends javax.swing.JFrame {
     }//GEN-LAST:event_iniciarEscolaAtividadesMouseClicked
 
     private void iniciarEscolaMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarEscolaMaterialMouseClicked
+        clipPlayer.playSound();
         dispose();
         var jogoMaterial = new JogoDaMemoria("material", "imagemMaterial.png");
         jogoMaterial.inicializarJogoMemoria(8, "material");
@@ -165,10 +170,11 @@ public class FaseEscola extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_iniciarEscolaMaterialMouseClicked
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void voltarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarButtonMouseClicked
+        clipPlayer.playSound();
         new TelaMapa().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_voltarButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -179,6 +185,6 @@ public class FaseEscola extends javax.swing.JFrame {
     private javax.swing.JPanel escola;
     private javax.swing.JLabel iniciarEscolaAtividades;
     private javax.swing.JLabel iniciarEscolaMaterial;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel voltarButton;
     // End of variables declaration//GEN-END:variables
 }

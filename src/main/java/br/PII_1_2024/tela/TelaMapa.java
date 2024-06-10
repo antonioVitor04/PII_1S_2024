@@ -8,12 +8,6 @@ package br.PII_1_2024.tela;
  *
  * @author anton
  */
-import br.PII_1_2024.tela.HUBAluno;
-import br.PII_1_2024.tela.FaseRestaurante;
-import br.PII_1_2024.tela.FaseParquinho;
-import br.PII_1_2024.tela.FaseHospital;
-import br.PII_1_2024.tela.FaseEscola;
-import br.PII_1_2024.tela.FaseCasa;
 import br.PII_1_2024.jogo.AudioCurto;
 import br.PII_1_2024.jogo.TelaFundoJogo;
 import java.awt.BorderLayout;

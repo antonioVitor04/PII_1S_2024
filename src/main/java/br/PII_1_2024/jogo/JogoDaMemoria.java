@@ -113,7 +113,7 @@ public class JogoDaMemoria extends javax.swing.JFrame{
     
 
     public void virarCarta(Carta carta, int numeroDePares) {
-            // Verificar se já foram encontrados todos os pares
+        // Verificar se já foram encontrados todos os pares
         if (paresEncontrados == numeroDePares) {
             return;
         }
@@ -133,33 +133,52 @@ public class JogoDaMemoria extends javax.swing.JFrame{
         // Verificar se já existe uma carta selecionada
         if (cartaSelecionada == null) {
             cartaSelecionada = carta;
-        } 
-        else {
+        } else {
             // Verificar se as cartas formam um par
-            if (carta.getNumero() == cartaSelecionada.getNumero()) {
+            if (verificarPar(carta) ==  true) {
                 paresEncontrados++;
-                int index1 = cartasPainel.getComponentZOrder(carta);
-                int index2 = cartasPainel.getComponentZOrder(cartaSelecionada);
 
-                cartasPainel.remove(carta);
-                cartasPainel.add(new JLabel(), index1);
-
-                cartasPainel.remove(cartaSelecionada);
-                cartasPainel.add(new JLabel(), index2);
-                cartaSelecionada = null; // Limpar a carta selecionada
-
-                // Verificar se todos os pares foram encontrados
-                if (paresEncontrados == numeroDePares) {
-                    onJogoTerminado();
-                }
-                    
-            } 
-            else {
                 // Impedir virar de outras cartas até que o tempo de espera termine
                 virarPermitido = false;
 
-                // Aguardar um momento e desvirar as cartas
-                Timer timer2 = new Timer(1000, new ActionListener() {
+                // Aguardar 1,5 segundos antes de remover as cartas
+                Timer timer = new Timer(1500, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Substituir as cartas por componentes transparentes
+                        int index1 = cartasPainel.getComponentZOrder(carta);
+                        int index2 = cartasPainel.getComponentZOrder(cartaSelecionada);
+                        
+                        cartasPainel.remove(carta);
+                        cartasPainel.add(new JLabel(), index1);
+                        
+                        cartasPainel.remove(cartaSelecionada);
+                        cartasPainel.add(new JLabel(), index2);
+                        
+                        cartasPainel.revalidate();
+                        cartasPainel.repaint();
+
+                        // Permitir virar de outras cartas novamente
+                        virarPermitido = true;
+
+                        // Limpar a carta selecionada
+                        cartaSelecionada = null;
+
+                        // Verificar se todos os pares foram encontrados
+                        if (paresEncontrados == numeroDePares) {
+                            onJogoTerminado();
+                        }
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();
+            } else {
+                // Impedir virar de outras cartas até que o tempo de espera termine
+                virarPermitido = false;
+
+                // Aguardar 1,5 segundos e desvirar as cartas
+                Timer timer = new Timer(1500, new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         carta.virar(); // Desvirar a carta clicada
                         cartaSelecionada.virar(); // Desvirar a carta previamente selecionada
@@ -170,11 +189,17 @@ public class JogoDaMemoria extends javax.swing.JFrame{
                         cartaSelecionada = null; // Limpar a carta selecionada
                     }
                 });
-                timer2.setRepeats(false);
-                timer2.start();
+                timer.setRepeats(false);
+                timer.start();
             }
         }
     }
+    
+    private boolean verificarPar(Carta carta){
+        return carta.getNumero() == cartaSelecionada.getNumero();
+    }
+    
+    
     public void setJogoTerminadoListener(ActionListener listener) {
         this.jogoTerminadoListener = listener;
     }

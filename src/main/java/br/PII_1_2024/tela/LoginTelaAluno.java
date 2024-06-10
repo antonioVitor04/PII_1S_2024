@@ -125,9 +125,8 @@ public class LoginTelaAluno extends javax.swing.JFrame {
             var aluno = new Aluno(login);
             aluno.setNome(login);
             var dao = new AlunoDAO();
-            if (dao.existe(aluno)){
-                // JOptionPane.showMessageDialog (null, "BEM VINDO, " 
-                //        + aluno.getNome() + "!");
+            boolean alunoOk = dao.existe(aluno);
+            if (alunoOk){
                 codigoAluno = dao.obterCodigo(aluno);
                 new HUBAluno().setVisible(true);
                 this.dispose();

@@ -5,6 +5,7 @@
 package br.PII_1_2024.tela;
 
 import br.PII_1_2024.bd.AlunoFaseDAO;
+import br.PII_1_2024.jogo.AudioCurto;
 import br.PII_1_2024.jogo.JogoDaMemoria;
 import br.PII_1_2024.jogo.TelaFundoJogo;
 import br.PII_1_2024.modelo.AlunoFase;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
  * @author anton
  */
 public class FaseRestaurante extends javax.swing.JFrame {
+    private AudioCurto clipPlayer;
     private static int alunoAtual = LoginTelaAluno.codigoAluno;
     private static AlunoFaseDAO dao = new AlunoFaseDAO();
     /**
@@ -26,6 +28,7 @@ public class FaseRestaurante extends javax.swing.JFrame {
      */
     public FaseRestaurante() {
         initComponents();
+        clipPlayer = new AudioCurto("src/main/resources/audio/botaoSound.mp3");
         setResizable(false);
         setLocationRelativeTo(null);
         TelaFundoJogo t = new
@@ -47,7 +50,7 @@ public class FaseRestaurante extends javax.swing.JFrame {
 
         restaurante = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        voltarButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,10 +63,10 @@ public class FaseRestaurante extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar2.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        voltarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar2.png"))); // NOI18N
+        voltarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                voltarButtonMouseClicked(evt);
             }
         });
 
@@ -77,14 +80,14 @@ public class FaseRestaurante extends javax.swing.JFrame {
                 .addGap(457, 457, 457))
             .addGroup(restauranteLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         restauranteLayout.setVerticalGroup(
             restauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(restauranteLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(141, 141, 141)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(286, Short.MAX_VALUE))
@@ -105,6 +108,7 @@ public class FaseRestaurante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        clipPlayer.playSound(); 
         dispose();
         var jogoRestaurante = new JogoDaMemoria("restaurante", "imagemRestaurante.png");
         jogoRestaurante.inicializarJogoMemoria(10, "restaurante");
@@ -129,10 +133,11 @@ public class FaseRestaurante extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void voltarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarButtonMouseClicked
+        clipPlayer.playSound();
         new TelaMapa().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_voltarButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -141,7 +146,7 @@ public class FaseRestaurante extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel restaurante;
+    private javax.swing.JLabel voltarButton;
     // End of variables declaration//GEN-END:variables
 }

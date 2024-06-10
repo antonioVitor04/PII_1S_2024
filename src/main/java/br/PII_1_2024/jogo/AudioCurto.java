@@ -23,7 +23,8 @@ public class AudioCurto {
     public AudioCurto(String filePath) {
         try {
             this.audioData = loadAudio(filePath);  // Chama o método loadAudio
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -48,7 +49,8 @@ public class AudioCurto {
                 ByteArrayInputStream bais = new ByteArrayInputStream(audioData);  // Cria um InputStream a partir dos dados do áudio
                 AdvancedPlayer player = new AdvancedPlayer(bais);  // Cria o player
                 player.play();  // Toca o som
-            } catch (JavaLayerException e) {
+            } 
+            catch (JavaLayerException e) {
                 e.printStackTrace();
             }
         }).start();

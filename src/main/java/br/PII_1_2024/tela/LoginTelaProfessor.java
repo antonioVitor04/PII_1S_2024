@@ -128,7 +128,8 @@ public class LoginTelaProfessor extends javax.swing.JFrame {
             professor.setNome(login);
             professor.setSenha(senha);
             var dao = new ProfessorDAO();
-            if (dao.existe(professor)){
+            boolean professorOk = dao.existe(professor);
+            if (professorOk){
                 JOptionPane.showMessageDialog (null, "Bem vindo, " +
                 professor.getNome() + "!");
                 codigoProfessor = dao.obterCodigo(professor);

@@ -5,6 +5,7 @@
 package br.PII_1_2024.tela;
 
 import br.PII_1_2024.bd.AlunoFaseDAO;
+import br.PII_1_2024.jogo.AudioCurto;
 import br.PII_1_2024.jogo.JogoDaMemoria;
 import br.PII_1_2024.jogo.TelaFundoJogo;
 import br.PII_1_2024.modelo.AlunoFase;
@@ -20,7 +21,7 @@ import java.awt.event.ActionListener;
  * @author anton
  */
 public class FaseCasa extends javax.swing.JFrame {     
-    
+    private AudioCurto clipPlayer;
     private static int alunoAtual = LoginTelaAluno.codigoAluno;
     private static AlunoFaseDAO dao = new AlunoFaseDAO();
     
@@ -30,6 +31,7 @@ public class FaseCasa extends javax.swing.JFrame {
      */
     public FaseCasa() {
         initComponents();
+        clipPlayer = new AudioCurto("src/main/resources/audio/botaoSound.mp3");
         setResizable(false);
         setLocationRelativeTo(null);
         TelaFundoJogo t = new
@@ -56,7 +58,7 @@ public class FaseCasa extends javax.swing.JFrame {
         iniciarSala = new javax.swing.JLabel();
         iniciarBanheiro = new javax.swing.JLabel();
         iniciarCozinha = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        voltarButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,10 +93,10 @@ public class FaseCasa extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        voltarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botaoVoltar.png"))); // NOI18N
+        voltarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                voltarButtonMouseClicked(evt);
             }
         });
 
@@ -114,14 +116,14 @@ public class FaseCasa extends javax.swing.JFrame {
                 .addGap(156, 156, 156))
             .addGroup(telaFundoCasaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         telaFundoCasaLayout.setVerticalGroup(
             telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaFundoCasaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(telaFundoCasaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(iniciarBanheiro)
@@ -148,6 +150,7 @@ public class FaseCasa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarBanheiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarBanheiroMouseClicked
+        clipPlayer.playSound();
         dispose();
         var jogoBanheiro = new JogoDaMemoria("banheiro","imagemBanheiro.png");
         jogoBanheiro.inicializarJogoMemoria(8, "banheiro");
@@ -172,6 +175,7 @@ public class FaseCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_iniciarBanheiroMouseClicked
 
     private void iniciarCozinhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarCozinhaMouseClicked
+        clipPlayer.playSound();
         dispose();
         var jogoCozinha = new JogoDaMemoria("cozinha","imagemCozinha.png");
         jogoCozinha.inicializarJogoMemoria(8, "cozinha");
@@ -197,6 +201,7 @@ public class FaseCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_iniciarCozinhaMouseClicked
 
     private void iniciarQuartoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarQuartoMouseClicked
+        clipPlayer.playSound();
         dispose();
         var jogoQuarto = new JogoDaMemoria("quarto", "imagemQuarto.png");
         jogoQuarto.inicializarJogoMemoria(8, "quarto");
@@ -222,6 +227,7 @@ public class FaseCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_iniciarQuartoMouseClicked
 
     private void iniciarSalaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarSalaMouseClicked
+        clipPlayer.playSound();
         this.dispose();
         var jogoSala = new JogoDaMemoria("sala", "imagemSala.png");
         jogoSala.inicializarJogoMemoria(8, "sala");
@@ -246,10 +252,11 @@ public class FaseCasa extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_iniciarSalaMouseClicked
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void voltarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarButtonMouseClicked
+        clipPlayer.playSound();
         new TelaMapa().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_voltarButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -261,7 +268,7 @@ public class FaseCasa extends javax.swing.JFrame {
     private javax.swing.JLabel iniciarCozinha;
     private javax.swing.JLabel iniciarQuarto;
     private javax.swing.JLabel iniciarSala;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel telaFundoCasa;
+    private javax.swing.JLabel voltarButton;
     // End of variables declaration//GEN-END:variables
 }

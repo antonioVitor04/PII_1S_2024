@@ -19,8 +19,8 @@ public class AudioLoop {
     private String filePath;
     private boolean isPlaying;
     private Thread playThread;
-    private final int songDurationMs = 17000; // Duração da música em milissegundos
-    private final int overlapMs = 240; // Tempo de sobreposição entre as músicas
+    private final int duracaoMusica = 17000; // Duração da música em milissegundos
+    private final int sobreposicao = 240; // Tempo de sobreposição entre as músicas
  
 
     public AudioLoop(String filePath) {
@@ -34,7 +34,8 @@ public class AudioLoop {
             while (isPlaying) {
                 try {
                     playAudio();
-                } catch (IOException | JavaLayerException | InterruptedException e) {
+                } 
+                catch (IOException | JavaLayerException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -49,7 +50,8 @@ public class AudioLoop {
             Thread playerThread = new Thread(() -> {
                 try {
                     player.play();
-                } catch (JavaLayerException e) {
+                } 
+                catch (JavaLayerException e) {
                     e.printStackTrace();
                 }
             });
@@ -57,7 +59,7 @@ public class AudioLoop {
             playerThread.start();
 
             // Aguarda um pouco antes do final da música para iniciar a próxima reprodução
-            Thread.sleep(songDurationMs - overlapMs);
+            Thread.sleep(duracaoMusica - sobreposicao);
 
             // Termina a reprodução atual
             playerThread.interrupt();
