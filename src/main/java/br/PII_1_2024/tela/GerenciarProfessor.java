@@ -215,8 +215,8 @@ public class GerenciarProfessor extends javax.swing.JFrame {
         String nomeProfessor = nomeProfessorTextField.getText();
         String senhaProfessor = senhaProfessorTextField.getText();
         if (nomeProfessor == null || nomeProfessor.length() == 0
-                && senhaProfessor == null || senhaProfessor.length() == 0){
-            JOptionPane.showMessageDialog (null, "Preencha o nome da turma");
+                && senhaProfessor == null || senhaProfessor.length() < 8){
+            JOptionPane.showMessageDialog (null, "ERRO, DIGITE UM NOME DE USUÁRIO E SENHA VÁLIDOS");
         }
         else{
             try{
